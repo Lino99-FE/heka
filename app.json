@@ -1,0 +1,17 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/makeCard/makeCard",
+    "pages/saveCard/saveCard",
+    "pages/news/news",
+    "pages/newsDetail/newsDetail",
+    "pages/landScape/landScape",
+    "pages/landScapeDetail/landScapeDetail"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "贺卡小程序",
+    "navigationBarTextStyle":"black"
+  }
+}

@@ -1,0 +1,3 @@
+.btn-border::after {
+  border: none;
+}

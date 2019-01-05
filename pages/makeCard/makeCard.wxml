@@ -1,0 +1,74 @@
+<view class="view">
+  <image class='view-bg1' src='/images/index-bg-bottom.png'></image>
+  <image class='view-bg2' mode='widthFix' src='/images/index-bg.png'></image>
+  <view class='container'>
+    <view class='card-view'>
+      <view class='card-header'>
+        <image class='card-avatar' mode='aspectFill' src='{{avatarUrl}}'></image>
+        <text class='card-nick'>{{nick}}</text>
+        <text class='card-ad'>{{cardAd}}</text>
+      </view>
+      <view class='card-key'>
+        <image class='card-key-img-bg' mode='aspectFill' src='{{keyImgUrl}}'></image>
+        <view class='card-key-view-bg'>
+          <view class='card-key-view-key'>{{cardKey}}</view>
+          <view class='card-key-view-tip'>{{cardKeyTip}}</view>
+        </view>
+      </view>
+      <view class='card-blessing'>{{cardBless}}</view>
+      <view class='card-landscape'>
+        <image class='card-landscape-img' mode='aspectFill' src='{{landScapeUrl}}'></image>
+      </view>
+      <view class='card-introduction'>
+        <view class='card-introduction-desc'>
+          <view class='title'>{{landScapeName}}</view>
+          <view class='desc'>{{landScapeDesc}}</view>
+        </view>
+        <view class='card-introduction-code'>
+          <image class='code-img' mode='aspectFill' src='{{codeImgUrl}}'></image>
+          <view class='code-tip'>{{codeTip}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{!saveImgFlag}}" class='make-card-view'>
+      <view class='make-card-item1'>
+        <view class='bottom-btn'>更换景点</view>
+        <view class='bottom-btn' style='margin-left: 60rpx'>更换祝福语</view>
+      </view>
+      <view class='make-card-item2'>
+        <view bindtap='makePoster' class='bottom-btn make-btn'>完成制作</view>
+        <button wx:if="{{!photoAuthFlag}}" open-type='openSetting' class='bottom-btn btn-border make-btn'>授权相册</button>
+      </view>
+    </view>
+    <view wx:else class='share-view'>
+      <view class='share-view-tip'>马上分享至</view>
+      <view class='share-view-btn'>
+        <view class='share-view-item'>
+          <button open-type='share' class='share-btn'></button>
+          <image class='share-view-icon' mode='aspectFill' src='/images/wechat.png'></image>
+          <view class='share-view-text'>微信好友</view>
+        </view>
+        <view class='share-view-item'>
+          <button class='share-btn'></button>
+          <image class='share-view-icon' mode='aspectFill' src='/images/moments.png'></image>
+          <view class='share-view-text'>朋友圈</view>
+        </view>
+        <view class='share-view-item'>
+          <button class='share-btn'></button>
+          <image class='share-view-icon' mode='aspectFill' src='/images/weibo.png'></image>
+          <view class='share-view-text'>新浪微博</view>
+        </view>
+        
+        
+      </view>
+    </view>
+
+
+
+  </view>
+
+</view>
+<!-- <scroll-view scroll-x style="width: 670rpx;height: 800px;padding: 40rpx;background: rgba(250, 217, 136, 1)">
+  <canvas style="width: 520px;height: 786px;background:transparent;" canvas-id="myCanvas"></canvas>
+</scroll-view> -->
+<canvas style="width: 520px;height: 786px;background:transparent;position: fixed;top: -10000px;" canvas-id="myCanvas"></canvas>
