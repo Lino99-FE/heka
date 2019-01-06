@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -40,9 +40,10 @@
 			"current": 0,
 			"list": [
 				{
-					"id": -1,
-					"name": "贺卡制作",
-					"pathName": "pages/makeCard/makeCard"
+					"id": 0,
+					"name": "风景",
+					"pathName": "pages/landScape/landScape",
+					"query": ""
 				}
 			]
 		}

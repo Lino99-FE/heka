@@ -1,1 +1,7 @@
-/* pages/landScapeDetail/landScapeDetail.wxss */
+.slide-image {
+  width: 427rpx; 
+  height: 641rpx;
+  border-radius: 20rpx;
+  position: relative;
+  background: transparent;
+}

@@ -98,9 +98,47 @@ const saveImage = async (imgTmpPath, that) => {
   }
 }
 
+// 获取用户信息，昵称、头像
+const getUserInfoWx = () => {
+  return new Promise((resolve, reject) => {
+    wx.getUserInfo({
+      success: res => {
+        resolve(res)
+        // const userInfo = res.userInfo
+        // const nickName = userInfo.nickName
+        // const avatarUrl = userInfo.avatarUrl
+        // const gender = userInfo.gender // 性别 0：未知、1：男、2：女
+        // const province = userInfo.province
+        // const city = userInfo.city
+        // const country = userInfo.country
+      },
+      fail: err => {
+        reject(err)
+      }
+    })
+  })
+}
+
+// 获取图片信息
+const getImageInfoWx = (imgTmpPath) => {
+  return new Promise((resolve, reject) => {
+    wx.getImageInfo({
+      src: imgTmpPath,
+      success: res => {
+        resolve(res)
+      },
+      fail: err => {
+        reject(err)
+      }
+    })
+  })
+}
+
 export default {
   formatTime,
   getSettingWx,
   saveImageWx,
+  getUserInfoWx,
+  getImageInfoWx,
   saveImage
 }

@@ -1,1 +1,86 @@
-/* pages/landScape/landScape.wxss */
+.main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.main-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+}
+
+.main-view {
+  position: relative;
+  padding-top: 250rpx;
+  z-index: 3;
+}
+
+.swiperClass {
+  margin: 0;
+  height: 641rpx;
+}
+
+.slide-image {
+  width: 427rpx;
+  height: 641rpx;
+  border-radius: 20rpx;
+  position: relative;
+  background: transparent;
+}
+
+image.active {
+  transform: none;
+  transition: all 0.4s ease-in 0s;
+}
+
+image.firstitem {
+  transform: scale(0.41493) translateX(-80rpx);
+}
+
+image.leftitem {
+  transform: scale(0.41493) translateX(80rpx);
+}
+
+image.rightitem {
+  transform: scale(0.41493) translateX(-80rpx);
+}
+
+image.quiet {
+  opacity: 0.6;
+  transition: all 0.2s ease-in 0s;
+}
+
+.bottom-view {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+  flex-direction: column;
+}
+
+.bottom-triangle {
+  margin-top: 40rpx;
+  width: 0;
+  height: 0;
+  border-width: 16rpx 16rpx;
+  border-style: solid;
+  border-color: #535353 transparent transparent transparent;
+}
+
+.detail-btn {
+  margin-top: 40rpx;
+  width: 260rpx;
+  height: 63rpx;
+  border: 1rpx solid rgba(98, 98, 98, 1);
+  border-radius: 10px;
+  font-size: 34rpx;
+  color: rgba(79, 86, 90, 1);
+  line-height: 63rpx;
+  text-align: center;
+}
