@@ -12,10 +12,6 @@ Page({
       'https://fuwu.saasphp.cn/8.JPG',
       'https://fuwu.saasphp.cn/9.jpg',
     ],
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
     swiperIndex: 0 //这里不写第一次启动展示的时候会有问题
   },
   bindchange(e) {

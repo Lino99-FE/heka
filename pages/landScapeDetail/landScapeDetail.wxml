@@ -1,3 +1,69 @@
-<view>
-  <image src="/images/landscape-1.png" class="slide-image" mode='aspectFill'></image>
+<view class='main'>
+  <view class='title-view'>
+    <view class='art-banner'>
+      <view class='border-out-line border-out-top'></view>
+      <view class='border-out-line border-out-bottom'></view>
+      <view class='art-banner-in'>
+        姑婆山景点介绍
+        <view class='border-in-line border-in-left'></view>
+        <view class='border-in-line border-in-right'></view>
+      </view>
+    </view>
+
+  </view>
+  <view class='title-triangle'></view>
+  <view class='land-title'>贺州姑婆山为国家AAAA级旅游景区、国家级森林公园</view>
+  <view class='land-img'>
+    <swiper bindtap='swiperClick' current="{{showSwiperIndex}}" class="swiperClass" duration="2000" autoplay bindchange="bindchange">
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" mode='aspectFill'>
+          </image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- <view class='img-idx-tip'>{{swiperIndex + 1}}/{{imgUrls.length}}</view> -->
+    <view bindtap='swiperLeft' class='img-left-btn img-btn'>
+      <image class='img-btn-left-img' mode='widthFix' src='/images/white-arrow.png'></image>
+    </view>
+    <view bindtap='swiperRight' class='img-right-btn img-btn'>
+      <image mode='widthFix' src='/images/white-arrow.png'></image>
+    </view>
+    <view class='img-tip' bindtap='swiperClick'>
+      <image mode='aspectFill' src='/images/chakandatu.png'></image>点击查看大图</view>
+  </view>
+  <view class='land-desc'>
+    <view class='land-desc-content {{readMoreFlag?"":"text-hidden"}}'>
+      姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里
+    </view>
+  </view>
+  <view wx:if="{{!readMoreFlag}}" class='readmore-view' bindtap='readMoreFn'>
+    <text>查看更多</text>
+  </view>
+  <view class='make-btn-view'>
+    <view class='make-btn'>制作姑婆山贺卡</view>
+  </view>
+  <view class='bottom-view'>
+    <view class='title'>
+      <view class='title-left'>
+        <view class='bottom-triangle'></view>其他景点</view>
+      <view class='title-right' bindtap='goMain'>
+        <text>查看更多>></text>
+      </view>
+    </view>
+    <view class='other-land'>
+      <view class='other-land-item'>
+        <image src="{{imgUrls[0]}}" mode='aspectFill' class='other-land-item-img'></image>
+        <view class='other-land-item-name'>姑婆山</view>
+      </view>
+      <view class='other-land-item'>
+        <image src="{{imgUrls[0]}}" mode='aspectFill' class='other-land-item-img'></image>
+        <view class='other-land-item-name'>姑婆山</view>
+      </view>
+      <view class='other-land-item'>
+        <image src="{{imgUrls[0]}}" mode='aspectFill' class='other-land-item-img'></image>
+        <view class='other-land-item-name'>姑婆山</view>
+      </view>
+    </view>
+  </view>
 </view>

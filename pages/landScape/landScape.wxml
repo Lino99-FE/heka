@@ -1,5 +1,6 @@
 <view class='main'>
-  <image class='main-bg' mode='aspectFill' src='/images/landscape-bg.png'></image>
+  <image class='main-bg-item main-bg-top' mode='widthFix' src='/images/landscape-bg-top.png'></image>
+  <image class='main-bg-item main-bg-bottom' mode='widthFix' src='/images/landscape-bg-bottom.png'></image>
   <view class='main-view'>
     <swiper class="swiperClass" interval="2000" duration="1000" previous-margin="84px" next-margin="74px" circular bindchange="bindchange">
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">
@@ -11,7 +12,16 @@
     </swiper>
     <view class='bottom-view'>
       <view class='bottom-triangle'></view>
-      <view bindtap='goDetail' class='detail-btn'>贺州姑婆山</view>
+      <view bindtap='goDetail' class='art-banner detail-btn'>
+        <view class='border-out-line border-out-top'></view>
+        <view class='border-out-line border-out-bottom'></view>
+        <view class='art-banner-in'>
+          贺州姑婆山
+          <view class='border-in-line border-in-left'></view>
+          <view class='border-in-line border-in-right'></view>
+        </view>
+      </view>
+
     </view>
 
   </view>
