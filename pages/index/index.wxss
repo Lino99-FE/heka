@@ -1,5 +1,5 @@
 .view {
-  position: relative;
+  position: fixed;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -39,7 +39,7 @@
 .title {
   font-size: 36rpx;
   font-weight: 400;
-  color: rgba(199, 157, 90, 1);
+  color: #F4D365;
   height: 210rpx;
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@
   height: 0;
   border-width: 16rpx 17rpx;
   border-style: solid;
-  border-color: rgba(235, 180, 106, 1) transparent transparent transparent;
+  border-color: #F4D365 transparent transparent transparent;
 }
 
 .main {
@@ -78,7 +78,7 @@
 
 .main-title {
   font-size: 26rpx;
-  color: rgba(235, 180, 106, 1);
+  color: #EBB46A;
   line-height: 26rpx;
   text-align: center;
   margin-top: 96rpx;
@@ -109,7 +109,7 @@
   box-shadow: 6rpx 10rpx 0rpx 0rpx rgba(6, 1, 0, 0.35), 0rpx 0rpx 57rpx 0rpx rgba(80, 8, 9, 1);
   border-radius: 30rpx;
   font-size: 30rpx;
-  color: rgba(226, 194, 141, 1);
+  color: #E2C28D;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -149,7 +149,7 @@
   font-size: 25rpx;
   line-height: 63rpx;
   text-align: center;
-  color: rgba(82, 82, 82, 1);
+  color: #525252;
   width: 273rpx;
   height: 63rpx;
   background: #F4D365;
@@ -168,8 +168,8 @@
   right: 0;
   margin-right: -86rpx;
   margin-bottom: -152rpx;
-  height: 235rpx;
-  width: 108rpx;
+  height: 285rpx;
+  width: 133rpx;
   z-index: 9;
 }
 
@@ -178,11 +178,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 108rpx;
-  height: 108rpx;
+  width: 133rpx;
+  height: 133rpx;
   position: relative;
-  font-size: 19rpx;
-  color: rgba(33, 24, 22, 1);
+  font-size: 18rpx;
+  text-shadow:2px -1px 35px rgba(69,2,0,1);
+  color: #FACE66;
 }
 
 .slide-item-content image {
@@ -201,10 +202,9 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: #fff;
-  box-shadow: 0px 8px 133px 0px rgba(44, 0, 0, 0.74);
   border-radius: 50%;
-  opacity: 0.6;
+  width: 133rpx;
+  height: 133rpx;
 }
 
 .slide2 {

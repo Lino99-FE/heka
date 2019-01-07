@@ -8,9 +8,10 @@ App({
 
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    storageTime: 86400000, // 数据本地缓存时间
   },
-  async apiRequst(api, params = {}) {
-    return await http.request(api, params);
+  async apiRequst(api, params = {}, queryString = '') {
+    return await http.request(api, params, queryString);
   }
 })

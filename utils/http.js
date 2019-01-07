@@ -2,9 +2,11 @@ import apiData from '../config/api.js';
 import * as configObj from '../config/index.js';
 
 class Http {
-  request(api, params) {
-    console.log(configObj)
-    const url = configObj.baseURL + apiData[api].url;
+  request(api, params = {}, queryString = '') {
+    let url = configObj.baseURL + apiData[api].url;
+    if (queryString !== '') {
+      url = url.replace('{queryString}', queryString)
+    }
     const header = Object.assign({
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -20,9 +22,9 @@ class Http {
           let data = res.data
           data = data.data
           if (configObj.env == 'dev') {
-            console.log('--------result-------', res.data)
+            // console.log('--------result-------', res.data)
           }
-          resolve(res.data.data)
+          resolve(res)
         },
         fail(err) {
           reject(err);

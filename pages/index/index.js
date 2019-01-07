@@ -1,22 +1,23 @@
 import regeneratorRuntime from '../../utils/runtime.js'
 import util from '../../utils/util.js'
+import zodiacData from '../../utils/zodiacData.js'
+import constellationData from '../../utils/constellationData.js'
 
 const app = getApp()
+const choiceIndex = 5
 
 Page({
   data: {
-    zodiacIndex: [5],
-    zodiac: ['子鼠', '丑牛', '寅虎', '卯兔', '辰龙', '巳蛇', '午马', '未羊', '申猴', '酉鸡', '戌狗', '亥猪'],
-    constellationIndex: [5],
-    constellation: ['白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座'],
-    pickerZodiac: '请选择',
-    pickerConstellation: '请选择',
+    zodiacIndex: [choiceIndex],
+    zodiac: zodiacData,
+    constellationIndex: [choiceIndex],
+    constellation: constellationData,
+    pickerZodiac: zodiacData[choiceIndex],
+    pickerConstellation: constellationData[choiceIndex],
     userInfoAuthFlag: false,
   },
 
   async onLoad() {
-    // const res = await app.apiRequst('login', {});
-    // console.log(res)
     userInfoAuthFlag = false
     // 校验是否有授权
     let {
@@ -84,7 +85,7 @@ Page({
   goMakeCard() {
     const { pickerZodiac, pickerConstellation} = this.data
     wx.navigateTo({
-      url: `/pages/makeCard/makeCard?zodiac=${pickerZodiac}&constellation=${pickerConstellation}`,
+      url: `/pages/makeCard/makeCard?zodiacname=${pickerZodiac.name}&zodiac=${pickerZodiac.value}&constellation=${pickerConstellation.value}`,
     })
   },
 

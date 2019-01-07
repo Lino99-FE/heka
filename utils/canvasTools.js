@@ -1,18 +1,23 @@
 //文字换行处理
 // canvas 标题超出换行处理
-const wordsWrap = (ctx, name, maxWidth, startX, srartY, fontHight, fontSize) => {
+const wordsWrap = (ctx, name, maxWidth, startX, srartY, fontHight, fontSize, alignCenter = false, cardWidth = 520) => {
   let lineWidth = 0;
   let lastSubStrIndex = 0;
   for (let i = 0; i < name.length; i++) {
     lineWidth += ctx.measureText(name[i]).width;
-    if (lineWidth >= maxWidth || lineWidth + fontSize > maxWidth) {
+    if (lineWidth >= maxWidth) {
       ctx.fillText(name.substring(lastSubStrIndex, i), startX, srartY);
       srartY += fontHight;
       lineWidth = 0;
       lastSubStrIndex = i;
     }
     if (i == name.length - 1) {
-      ctx.fillText(name.substring(lastSubStrIndex, i + 1), startX, srartY);
+      const laseName = name.substring(lastSubStrIndex, i + 1)
+      if (alignCenter) {
+        ctx.fillText(laseName, (cardWidth - ctx.measureText(laseName).width) / 2 + 10, srartY);
+      } else {
+        ctx.fillText(laseName, startX, srartY);
+      }
     }
   }
 }

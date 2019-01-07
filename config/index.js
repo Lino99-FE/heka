@@ -1,5 +1,5 @@
-const productURL = 'https://portal.pinfire.cn'
-const devURL = 'https://saas.dev.pinquest.cn'
+const productURL = 'https://heka.saasphp.cn'
+const devURL = 'https://heka.saasphp.cn'
 const env = 'dev'
 // const env = 'product'
 const baseURL = env === 'product' ? productURL : devURL

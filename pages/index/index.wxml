@@ -16,7 +16,7 @@
             <view class='main-picker-border'></view>
             <picker-view class='picker-view' indicator-class="picker-class" mask-class="picker-mask" value="{{zodiacIndex}}" bindchange="zodiacBindChange">
               <picker-view-column>
-                <view class='picker-view-column' wx:for="{{zodiac}}" wx:key="*this">{{item}}</view>
+                <view class='picker-view-column' wx:for="{{zodiac}}" wx:key="{{item.value}}">{{item.name}}</view>
               </picker-view-column>
             </picker-view>
           </view>
@@ -24,7 +24,7 @@
             <view class='main-picker-border'></view>
             <picker-view class='picker-view' indicator-class="picker-class" mask-class="picker-mask" value="{{constellationIndex}}" bindchange="constellationBindChange">
               <picker-view-column>
-                <view class='picker-view-column' wx:for="{{constellation}}" wx:key="*this">{{item}}</view>
+                <view class='picker-view-column' wx:for="{{constellation}}" wx:key="{{item.value}}">{{item.name}}</view>
               </picker-view-column>
             </picker-view>
           </view>
@@ -36,7 +36,7 @@
       <button wx:else open-type='getUserInfo' bindgetuserinfo="userInfoCallBack" class='make-card-btn btn-border'>制作专属贺卡</button>
       <view class='slide'>
         <view class='slide1 slide-item' bindtap='goLandScape'>
-          <view class='slide-item-bg'></view>
+          <image mode='aspectFill' src='/images/slide-bg.png' class='slide-item-bg'></image>
           <view class='slide-item-content'>
             <image mode='widthFix' src='/images/fengjing-2.png'></image>
             <view>风景</view>
@@ -44,7 +44,7 @@
 
         </view>
         <view class='slide2 slide-item' bindtap='goNews'>
-          <view class='slide-item-bg'></view>
+          <image mode='aspectFill' src='/images/slide-bg.png' class='slide-item-bg'></image>
           <view class='slide-item-content'>
             <image mode='widthFix' src='/images/zixunlanmu.png'></image>
             <view>资讯</view>

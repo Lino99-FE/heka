@@ -9,7 +9,7 @@
         <text class='card-ad'>{{cardAd}}</text>
       </view>
       <view class='card-key'>
-        <image class='card-key-img-bg' mode='aspectFill' src='{{keyImgUrl}}'></image>
+        <image class='card-key-img-bg' mode='aspectFill' src='{{keyBGImgUrl}}'></image>
         <view class='card-key-view-bg'>
           <view class='card-key-view-key'>{{cardKey}}</view>
           <view class='card-key-view-tip'>{{cardKeyTip}}</view>
@@ -32,8 +32,8 @@
     </view>
     <view wx:if="{{!saveImgFlag}}" class='make-card-view'>
       <view class='make-card-item1'>
-        <view class='bottom-btn'>更换景点</view>
-        <view class='bottom-btn' style='margin-left: 60rpx'>更换祝福语</view>
+        <view class='bottom-btn' bindtap='changeView'>更换景点</view>
+        <view class='bottom-btn' bindtap='changeBless' style='margin-left: 60rpx'>更换祝福语</view>
       </view>
       <view class='make-card-item2'>
         <view bindtap='makePoster' class='bottom-btn make-btn'>完成制作</view>
@@ -62,11 +62,22 @@
         
       </view>
     </view>
-
-
-
   </view>
-
+  <view wx:if="{{showBlessFlag}}" class='bless'>
+    <view class='bless-top'>
+      <text>请选择祝福语</text>
+      <image bindtap='closeBless' mode='widthFix' src='/images/guanbi.png'></image>
+    </view>
+    <scroll-view class='bless-content' scroll-y>
+      <view wx:for="{{wishesBaseData}}" wx:for-index="index" bindtap='checkBless' data-index="{{index}}" wx:for-item="item" wx:key="{{item.id}}" class='bless-content-item'>
+        <text class='item-text'>{{item.blessing}}</text>
+        <image mode='aspectFill' src='{{currentBlessIndex==index?"/images/xuanze-check.png":"/images/xuanze.png"}}' class='item-img'></image>
+      </view>
+    </scroll-view>
+    <view class='bless-bottom'>
+      <view bindtap='saveBless' class='bless-bottom-btn'>保存</view>
+    </view>
+  </view>
 </view>
 <!-- <scroll-view scroll-x style="width: 670rpx;height: 800px;padding: 40rpx;background: rgba(250, 217, 136, 1)">
   <canvas style="width: 520px;height: 786px;background:transparent;" canvas-id="myCanvas"></canvas>
