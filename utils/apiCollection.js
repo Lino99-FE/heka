@@ -17,6 +17,7 @@ const getKeyWords = async () => {
   return cardKeys
 }
 
+// 拿全部风景
 const getViews = async () => {
   const time = new Date().getTime()
   let obj = {}
@@ -39,6 +40,7 @@ const getViews = async () => {
   return obj
 }
 
+// 拿祝福语
 const getWishes = async () => {
   const time = new Date().getTime()
   let obj = {}
@@ -61,8 +63,30 @@ const getWishes = async () => {
   return obj
 }
 
+// 拿风景详情
+const getViewDetail = async (id) => {
+  const time = new Date().getTime()
+  let obj = wx.getStorageSync('viewDetailObj')
+  if (obj && obj.data && (obj.time + app.globalData.storageTime) >= time) {
+    
+  } else {
+    obj = {
+      data: {}
+    }
+  }
+  if (!obj.data.hasOwnProperty(id)) {
+    const viewDetail = {}
+    const viewDetailRes = await app.apiRequst('viewDetail', {}, id)
+    obj.data[id] = viewDetailRes.data
+    obj.time = time
+    wx.setStorageSync('viewDetailObj', obj)
+  }
+  return obj
+}
+
 export default {
   getKeyWords,
   getViews,
-  getWishes
+  getWishes,
+  getViewDetail
 }

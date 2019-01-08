@@ -32,8 +32,7 @@
         <!-- <view style='text-align: center; font-size: 30rpx'>生肖：{{pickerZodiac}} 星座：{{pickerConstellation}}</view> -->
       </view>
       <image class='main-left-img' mode='widthFix' src='/images/ace866f2c3cd20b0bb89d91c16459bcc.png'></image>
-      <view wx:if="{{userInfoAuthFlag}}" bindtap='goMakeCard' class='make-card-btn'>制作专属贺卡</view>
-      <button wx:else open-type='getUserInfo' bindgetuserinfo="userInfoCallBack" class='make-card-btn btn-border'>制作专属贺卡</button>
+      <view bindtap='goMakeCard' class='make-card-btn'><text class='make-card-btn-text'>制作专属贺卡</text></view>
       <view class='slide'>
         <view class='slide1 slide-item' bindtap='goLandScape'>
           <image mode='aspectFill' src='/images/slide-bg.png' class='slide-item-bg'></image>

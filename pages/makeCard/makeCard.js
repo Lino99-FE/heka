@@ -2,8 +2,11 @@ import canvasTools from '../../utils/canvasTools.js'
 import util from '../../utils/util.js'
 import regeneratorRuntime from '../../utils/runtime.js'
 import apiCollection from '../../utils/apiCollection.js'
+import zodiacData from '../../utils/zodiacData.js'
+import constellationData from '../../utils/constellationData.js'
 
 const app = getApp()
+const choiceIndex = 2
 
 Page({
 
@@ -34,48 +37,86 @@ Page({
     wishesBaseData: [], // 祝福语数据
     currentBlessIndex: 0,
     newBless: '', // 手动选择的祝福语
+    userInfoAuthFlag: false, // 用户是否授权标记
+    makeImgFlag: false, // 是否生成海报
+    pickerZodiac: zodiacData[choiceIndex], // 默认选择的生肖
+    pickerConstellation: constellationData[choiceIndex], // 默认选择的星座
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  async onLoad(options) {    
-    const { zodiacname, zodiac, constellation} = options
-    const { avatarUrl, nickName } = app.globalData.userInfo
-    const imgRes = await util.getImageInfoWx(avatarUrl)
-
-    // 拿关键字
-    let cardKeys = await apiCollection.getKeyWords()
-
-    // 拿风景
-    let viewsObj = await apiCollection.getViews()
-
-    // 祝福语
-    let wishesObj = await apiCollection.getWishes()
-
-    const viewsBaseData = viewsObj.baseData || []
-    const wishesBaseData = wishesObj.baseData || []
-
-    const landScapeName = viewsBaseData[0].name || ''
-    const landScapeDesc = viewsBaseData[0].card_intro || ''
-    const landScapeUrl = 'http://' + viewsBaseData[0].api_card_img
-    const cardKey = cardKeys[`${zodiac}${constellation}`]
-    const cardKeyTip = zodiacname.substring(1, 2) + '年关键字'
-    const cardBless = wishesBaseData[0].blessing
-
-    this.setData({
-      avatarUrl: imgRes.path,
-      nick: nickName,
-      cardKey,
-      landScapeName,
-      landScapeDesc,
-      landScapeUrl,
-      cardBless,
-      cardKeyTip,
-      viewsBaseData,
-      wishesBaseData,
+  async onLoad(options) {
+    wx.showLoading({
+      title: '加载中...',
     })
-    
+    try {
+
+      let { zodiacname, zodiac, constellation, viewId} = options
+      if (viewId) {
+        const { pickerZodiac, pickerConstellation} = this.data
+        zodiacname = pickerZodiac.name
+        zodiac = pickerZodiac.value
+        constellation = pickerConstellation.value
+      }
+
+      // 校验是否有授权
+      userInfoAuthFlag = false
+      let {
+        userInfoAuthFlag
+      } = this.data
+      try {
+        const { authSetting } = await util.getSettingWx()
+        if (authSetting && authSetting['scope.userInfo']) {
+          const { userInfo } = await util.getUserInfoWx()
+          userInfoAuthFlag = true
+          app.globalData.userInfo = userInfo
+          const imgRes = await util.getImageInfoWx(userInfo.avatarUrl)
+          this.setData({
+            avatarUrl: imgRes.path,
+            nick: userInfo.nickName,
+          })
+        }
+      } catch (e) {
+        console.warn(e)
+      } finally {
+        this.setData({
+          userInfoAuthFlag
+        })
+      }
+
+      // 拿关键字
+      let cardKeys = await apiCollection.getKeyWords()
+
+      // 拿风景
+      let viewsObj = await apiCollection.getViews()
+
+      // 祝福语
+      let wishesObj = await apiCollection.getWishes()
+
+      const viewsBaseData = viewsObj.baseData || []
+      const wishesBaseData = wishesObj.baseData || []
+
+      const landScapeName = viewsBaseData[0].name || ''
+      const landScapeDesc = viewsBaseData[0].card_intro || ''
+      const landScapeUrl = viewsBaseData[0].api_card_img
+      const cardKey = cardKeys[`${zodiac}${constellation}`]
+      const cardKeyTip = zodiacname.substring(1, 2) + '年关键字'
+      const cardBless = wishesBaseData[0].blessing
+
+      this.setData({
+        cardKey,
+        landScapeName,
+        landScapeDesc,
+        landScapeUrl,
+        cardBless,
+        cardKeyTip,
+        viewsBaseData,
+        wishesBaseData,
+      })
+    } finally {
+      wx.hideLoading()
+    }
   },
 
   async onShow() {
@@ -110,6 +151,26 @@ Page({
     return obj
   },
 
+  // 授权回调
+  userInfoCallBack(e) {
+    const {
+      userInfo
+    } = e.detail
+    if (userInfo) {
+      this.setData({
+        userInfoAuthFlag: true
+      })
+      app.globalData.userInfo = userInfo
+      this.makePoster()
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请允许授权，以便制作贺卡',
+        showCancel: false
+      })
+    }
+  },
+
   changeView() {
     let { currentViewIndex, viewsBaseData} = this.data
     if (currentViewIndex < viewsBaseData.length - 1) {
@@ -119,7 +180,7 @@ Page({
     }
     const landScapeName = viewsBaseData[currentViewIndex].name || ''
     const landScapeDesc = viewsBaseData[currentViewIndex].card_intro || ''
-    const landScapeUrl = 'http://' + viewsBaseData[currentViewIndex].api_card_img
+    const landScapeUrl = viewsBaseData[currentViewIndex].api_card_img
     this.setData({
       currentViewIndex,
       landScapeName,
@@ -186,8 +247,12 @@ Page({
       wx.showLoading({
         title: '生成中...'
       })
-      
-      const localImgRes = await util.getImageInfoWx(landScapeUrl.replace('http','https'))
+      let localImgRes = {}
+      try {
+        localImgRes = await util.getImageInfoWx(landScapeUrl.replace('http', 'https'))
+      } catch (e) {
+        wx.hideLoading()
+      }
       if (localImgRes && localImgRes.path) {
         const localLandScapeImgUrl = localImgRes.path
         const ctx = wx.createCanvasContext('myCanvas');
@@ -241,11 +306,15 @@ Page({
             canvasId: ctx.canvasId,
             success: res => {
               let shareImg = res.tempFilePath
+              const makeImgFlag = true
               this.setData({
-                shareImg
+                shareImg,
+                makeImgFlag
               }, () => {
+                wx.setNavigationBarTitle({
+                  title: '分享贺卡'
+                })
                 wx.hideLoading()
-                this.saveImg(shareImg)
               })
             },
             fail(err) {
@@ -267,8 +336,8 @@ Page({
   },
 
   // 长按保存事件
-  async saveImg(imgTmpPath) {
-    await util.saveImage(imgTmpPath, this)
+  async saveImg() {
+    await util.saveImage(this.data.shareImg, this)
   }
 
 })

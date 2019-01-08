@@ -4,8 +4,8 @@
   <view class='container'>
     <view class='card-view'>
       <view class='card-header'>
-        <image class='card-avatar' mode='aspectFill' src='{{avatarUrl}}'></image>
-        <text class='card-nick'>{{nick}}</text>
+        <open-data class='card-avatar' type="userAvatarUrl"></open-data>
+        <open-data class='card-nick' type="userNickName"></open-data>
         <text class='card-ad'>{{cardAd}}</text>
       </view>
       <view class='card-key'>
@@ -30,14 +30,15 @@
         </view>
       </view>
     </view>
-    <view wx:if="{{!saveImgFlag}}" class='make-card-view'>
+    <view wx:if="{{!makeImgFlag}}" class='make-card-view'>
       <view class='make-card-item1'>
         <view class='bottom-btn' bindtap='changeView'>更换景点</view>
         <view class='bottom-btn' bindtap='changeBless' style='margin-left: 60rpx'>更换祝福语</view>
       </view>
       <view class='make-card-item2'>
-        <view bindtap='makePoster' class='bottom-btn make-btn'>完成制作</view>
-        <button wx:if="{{!photoAuthFlag}}" open-type='openSetting' class='bottom-btn btn-border make-btn'>授权相册</button>
+        <view wx:if="{{userInfoAuthFlag}}" bindtap='makePoster' class='bottom-btn make-btn'>完成制作</view>
+        <button wx:else open-type='getUserInfo' bindgetuserinfo="userInfoCallBack" class='bottom-btn make-btn btn-border'>完成制作</button>
+        <!-- <button wx:if="{{!photoAuthFlag}}" open-type='openSetting' class='bottom-btn btn-border make-btn'>授权相册</button> -->
       </view>
     </view>
     <view wx:else class='share-view'>
@@ -48,13 +49,13 @@
           <image class='share-view-icon' mode='aspectFill' src='/images/wechat.png'></image>
           <view class='share-view-text'>微信好友</view>
         </view>
-        <view class='share-view-item'>
-          <button class='share-btn'></button>
+        <view class='share-view-item' bindtap='saveImg'>
+          <!-- <button class='share-btn'></button> -->
           <image class='share-view-icon' mode='aspectFill' src='/images/moments.png'></image>
           <view class='share-view-text'>朋友圈</view>
         </view>
-        <view class='share-view-item'>
-          <button class='share-btn'></button>
+        <view class='share-view-item' bindtap='saveImg'>
+          <!-- <button class='share-btn'></button> -->
           <image class='share-view-icon' mode='aspectFill' src='/images/weibo.png'></image>
           <view class='share-view-text'>新浪微博</view>
         </view>
@@ -63,6 +64,7 @@
       </view>
     </view>
   </view>
+  <view wx:if="{{showBlessFlag}}"  class='bless-mark' catchtouchmove></view>
   <view wx:if="{{showBlessFlag}}" class='bless'>
     <view class='bless-top'>
       <text>请选择祝福语</text>
@@ -75,7 +77,7 @@
       </view>
     </scroll-view>
     <view class='bless-bottom'>
-      <view bindtap='saveBless' class='bless-bottom-btn'>保存</view>
+      <view bindtap='saveBless' class='bottom-btn'>保存</view>
     </view>
   </view>
 </view>

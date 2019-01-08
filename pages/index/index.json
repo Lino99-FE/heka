@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
-  "backgroundColor": "#300A0C"
+  "backgroundColor": "#300A0C",
+  "navigationBarTitleText": "贺州风采"
 
 }

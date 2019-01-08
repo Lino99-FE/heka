@@ -4,7 +4,7 @@ import zodiacData from '../../utils/zodiacData.js'
 import constellationData from '../../utils/constellationData.js'
 
 const app = getApp()
-const choiceIndex = 5
+const choiceIndex = 2
 
 Page({
   data: {
@@ -14,49 +14,10 @@ Page({
     constellation: constellationData,
     pickerZodiac: zodiacData[choiceIndex],
     pickerConstellation: constellationData[choiceIndex],
-    userInfoAuthFlag: false,
   },
 
   async onLoad() {
-    userInfoAuthFlag = false
-    // 校验是否有授权
-    let {
-      userInfoAuthFlag
-    } = this.data
-    try {
-      const { authSetting } = await util.getSettingWx()
-      if (authSetting && authSetting['scope.userInfo']) {
-        const { userInfo } = await util.getUserInfoWx()
-        userInfoAuthFlag = true
-        app.globalData.userInfo = userInfo
-      }
-    } catch (e) {
-      console.warn(e)
-    } finally {
-      this.setData({
-        userInfoAuthFlag
-      })
-    }
-  },
-
-  userInfoCallBack(e) {
-    const {
-      detail
-    } = e
-    if (detail.userInfo) {
-      this.setData({
-        userInfoAuthFlag: true
-      })
-      app.globalData.userInfo = detail.userInfo
-      this.goMakeCard()
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '请允许授权，以便制作贺卡',
-        showCancel: false
-      })
-    }
-  },
+  },  
 
   zodiacBindChange(e) {
     const {

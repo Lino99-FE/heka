@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "backgroundColor": "#300A0C"
+  "backgroundColor": "#300A0C",
+  "navigationBarTitleText": "制作贺卡"
 }

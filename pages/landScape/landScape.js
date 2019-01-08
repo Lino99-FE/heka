@@ -35,8 +35,10 @@ Page({
   },
 
   goDetail() {
+    const { swiperIndex, viewsBaseData} = this.data
+    const { id } = viewsBaseData[swiperIndex]
     wx.navigateTo({
-      url: `/pages/landScapeDetail/landScapeDetail`,
+      url: `/pages/landScapeDetail/landScapeDetail?id=${id}`,
     })
   }
 

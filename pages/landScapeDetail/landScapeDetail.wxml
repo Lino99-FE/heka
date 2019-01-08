@@ -4,7 +4,7 @@
       <view class='border-out-line border-out-top'></view>
       <view class='border-out-line border-out-bottom'></view>
       <view class='art-banner-in'>
-        姑婆山景点介绍
+        {{viewsData.name}}景点介绍
         <view class='border-in-line border-in-left'></view>
         <view class='border-in-line border-in-right'></view>
       </view>
@@ -12,10 +12,10 @@
 
   </view>
   <view class='title-triangle'></view>
-  <view class='land-title'>贺州姑婆山为国家AAAA级旅游景区、国家级森林公园</view>
+  <view class='land-title'>{{viewsData.title}}</view>
   <view class='land-img'>
     <swiper bindtap='swiperClick' current="{{showSwiperIndex}}" class="swiperClass" duration="2000" autoplay bindchange="bindchange">
-      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+      <block wx:for="{{imgsUrl}}" wx:key="{{index}}">
         <swiper-item>
           <image src="{{item}}" class="slide-image" mode='aspectFill'>
           </image>
@@ -34,14 +34,14 @@
   </view>
   <view class='land-desc'>
     <view class='land-desc-content {{readMoreFlag?"":"text-hidden"}}'>
-      姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里姑婆山国家森林公园位于广西东北部；湘、桂、粤三省交界处的萌诸岭南端广西贺州市境内，距市区(八步)中心仅21公里
+      {{viewsData.intro}}
     </view>
   </view>
   <view wx:if="{{!readMoreFlag}}" class='readmore-view' bindtap='readMoreFn'>
     <text>查看更多</text>
   </view>
   <view class='make-btn-view'>
-    <view class='make-btn'>制作姑婆山贺卡</view>
+    <view class='make-btn' bindtap='goMakeCard'>制作{{viewsData.name}}贺卡</view>
   </view>
   <view class='bottom-view'>
     <view class='title'>
@@ -52,17 +52,17 @@
       </view>
     </view>
     <view class='other-land'>
-      <view class='other-land-item'>
-        <image src="{{imgUrls[0]}}" mode='aspectFill' class='other-land-item-img'></image>
-        <view class='other-land-item-name'>姑婆山</view>
+      <view class='other-land-item' data-id="{{randViewData[0].id}}" bindtap='goNewDetail'>
+        <image src="{{randViewData[0].api_main_img}}" mode='aspectFill' class='other-land-item-img'></image>
+        <view class='other-land-item-name'>{{randViewData[0].name}}</view>
       </view>
-      <view class='other-land-item'>
-        <image src="{{imgUrls[0]}}" mode='aspectFill' class='other-land-item-img'></image>
-        <view class='other-land-item-name'>姑婆山</view>
+      <view class='other-land-item' data-id="{{randViewData[1].id}}" bindtap='goNewDetail'>
+        <image src="{{randViewData[1].api_main_img}}" mode='aspectFill' class='other-land-item-img'></image>
+        <view class='other-land-item-name'>{{randViewData[1].name}}</view>
       </view>
-      <view class='other-land-item'>
-        <image src="{{imgUrls[0]}}" mode='aspectFill' class='other-land-item-img'></image>
-        <view class='other-land-item-name'>姑婆山</view>
+      <view class='other-land-item' data-id="{{randViewData[2].id}}" bindtap='goNewDetail'>
+        <image src="{{randViewData[2].api_main_img}}" mode='aspectFill' class='other-land-item-img'></image>
+        <view class='other-land-item-name'>{{randViewData[2].name}}</view>
       </view>
     </view>
   </view>

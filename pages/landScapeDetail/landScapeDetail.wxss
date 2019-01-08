@@ -63,7 +63,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 84rpx;
+  margin-bottom: 64rpx;
   font-weight: 300;
   color: rgba(253, 253, 253, 1);
   opacity: 0.6;
@@ -112,7 +112,7 @@
   font-size: 29rpx;
   font-weight: 400;
   color: rgba(79, 86, 90, 1);
-  text-indent: 2em;
+  /* text-indent: 2em; */
 }
 
 .text-hidden {
@@ -130,7 +130,7 @@
   text-align: center;
   font-size: 29rpx;
   font-weight: 400;
-  color: rgba(79, 86, 90, 1);
+  color: #80B0CA;
 }
 
 .make-btn-view {

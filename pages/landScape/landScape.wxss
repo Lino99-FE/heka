@@ -1,5 +1,5 @@
 .main {
-  position: relative;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   background: #fff;
@@ -19,12 +19,12 @@
 }
 
 .main-bg-bottom {
-  top: 976rpx;
+  top: 1080rpx;
 }
 
 .main-view {
   position: relative;
-  padding-top: 150rpx;
+  padding-top: 256rpx;
   z-index: 3;
 }
 
@@ -39,6 +39,7 @@
   border-radius: 20rpx;
   position: relative;
   background: transparent;
+  box-shadow:0rpx 9rpx 21rpx 6rpx rgba(80,84,88,0.27), 0rpx 0rpx 23rpx 2rpx rgba(219,227,238,0.16);
 }
 
 image.active {

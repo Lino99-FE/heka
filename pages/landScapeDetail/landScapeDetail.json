@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "backgroundColor": "#F4F4F4"
+  "backgroundColor": "#F4F4F4",
+  "navigationBarTitleText": "景点详情"
 }

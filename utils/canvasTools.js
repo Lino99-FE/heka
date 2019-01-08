@@ -30,7 +30,8 @@ const circleImg = (ctx, img, x, y, r) => {
   var cx = x + r;
   var cy = y + r;
   ctx.arc(cx, cy, r, 0, 2 * Math.PI, false);
-  ctx.stroke();
+  ctx.setStrokeStyle('#FFF9EB')
+  ctx.stroke()
   ctx.clip();
   ctx.drawImage(img, x, y, d, d);
   ctx.restore();

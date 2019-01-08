@@ -2,10 +2,10 @@
   <image class='main-bg-item main-bg-top' mode='widthFix' src='/images/landscape-bg-top.png'></image>
   <image class='main-bg-item main-bg-bottom' mode='widthFix' src='/images/landscape-bg-bottom.png'></image>
   <view class='main-view'>
-    <swiper class="swiperClass" interval="2000" duration="1000" previous-margin="84px" next-margin="74px" circular bindchange="bindchange">
-      <block wx:for="{{viewsBaseData}}" wx:key="{{index}}">
+    <swiper bindtap='goDetail' class="swiperClass" interval="2000" duration="1000" previous-margin="84px" next-margin="74px" circular bindchange="bindchange">
+      <block wx:for="{{viewsBaseData}}" wx:for-index="index" wx:key="{{index}}">
         <swiper-item>
-          <image src="{{'http://' + item.api_main_img}}" class="slide-image {{swiperIndex < index ? swiperIndex==0&&index==imgUrls.length-1?'leftitem quiet':'rightitem quiet': swiperIndex > index?swiperIndex==imgUrls.length-1&&index==0?'rightitem quiet':'leftitem quiet':'active'}}" mode='aspectFill'>
+          <image src="{{item.api_main_img}}" class="slide-image {{swiperIndex < index ? swiperIndex==0&&index==viewsBaseData.length-1?'leftitem quiet':'rightitem quiet': swiperIndex > index?swiperIndex==viewsBaseData.length-1&&index==0?'rightitem quiet':'leftitem quiet':'active'}}" mode='aspectFill'>
           </image>
         </swiper-item>
       </block>

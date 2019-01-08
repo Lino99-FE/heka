@@ -1,4 +1,8 @@
+import util from '../../utils/util.js'
+import regeneratorRuntime from '../../utils/runtime.js'
+import apiCollection from '../../utils/apiCollection.js'
 
+const app = getApp()
 
 Page({
 
@@ -6,27 +10,65 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrls: [
-      'https://fuwu.saasphp.cn/1.jpg',
-      'https://fuwu.saasphp.cn/2.jpg',
-      'https://fuwu.saasphp.cn/3.jpg',
-      'https://fuwu.saasphp.cn/4.jpg',
-      'https://fuwu.saasphp.cn/5.jpg',
-      'https://fuwu.saasphp.cn/6.jpg',
-      'https://fuwu.saasphp.cn/7.jpg',
-      'https://fuwu.saasphp.cn/8.JPG',
-      'https://fuwu.saasphp.cn/9.jpg',
-    ],
     swiperIndex: 0,
     showSwiperIndex: 0,
-    readMoreFlag: false
+    readMoreFlag: false,
+    viewsData: {}, // 风景详情数据
+    viewsBaseData: [], // 风景全部数据
+    randViewData: [],
+    imgsUrl: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
+  async onLoad(options) {
+    const {id} = options
+    // 拿风景详情
+    let viewsDetailObj = await apiCollection.getViewDetail(id)
+    const viewsData = viewsDetailObj.data[id] || {}
+    const imgsUrl = []
+    const { imgs} = viewsData.album
+    imgs.forEach(item => {
+      imgsUrl.push(item.api_path)
+    })
 
+    // 拿风景
+    let viewsObj = await apiCollection.getViews()
+    const viewsBaseData = viewsObj.baseData || []
+
+    // 其它景点，随机得到三个不重复的景点
+    const randViewData = []
+    
+    if (viewsBaseData.length > 4) {
+      do {
+        const rand = Math.floor(Math.random() * viewsBaseData.length)
+        if (viewsBaseData[rand].id !== parseInt(id)) {
+          let flag = true
+          for (let i = 0; i < randViewData.length; i++) {
+            if (randViewData[i].id === viewsBaseData[rand].id) {
+              flag = false
+            }
+          }
+          if (flag) {
+            randViewData.push(viewsBaseData[rand])
+          }
+        }
+      } while (randViewData.length < 3)
+    } else {
+      for (let i = 0; i < viewsBaseData.length; i++) {
+        if (viewsBaseData[i].id !== parseInt(id)) {
+          randViewData.push(item)
+        }
+      }
+    }
+
+    this.setData({
+      viewsData,
+      viewsBaseData,
+      randViewData,
+      imgsUrl
+    })
   },
 
   readMoreFn() {
@@ -69,6 +111,20 @@ Page({
     }
     this.setData({
       showSwiperIndex
+    })
+  },
+
+  goMakeCard() {
+    const { viewsData } = this.data
+    wx.redirectTo({
+      url: `/pages/makeCard/makeCard?viewId=${viewsData.id}`,
+    })
+  },
+
+  goNewDetail(e) {
+    const { id } = e.currentTarget.dataset
+    wx.redirectTo({
+      url: `/pages/landScapeDetail/landScapeDetail?id=${id}`,
     })
   },
 
