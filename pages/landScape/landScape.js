@@ -1,22 +1,36 @@
+import util from '../../utils/util.js'
+import regeneratorRuntime from '../../utils/runtime.js'
+import apiCollection from '../../utils/apiCollection.js'
+
+const app = getApp()
+
 Page({
 
   data: {
-    imgUrls: [
-      'https://fuwu.saasphp.cn/1.jpg',
-      'https://fuwu.saasphp.cn/2.jpg',
-      'https://fuwu.saasphp.cn/3.jpg',
-      'https://fuwu.saasphp.cn/4.jpg',
-      'https://fuwu.saasphp.cn/5.jpg',
-      'https://fuwu.saasphp.cn/6.jpg',
-      'https://fuwu.saasphp.cn/7.jpg',
-      'https://fuwu.saasphp.cn/8.JPG',
-      'https://fuwu.saasphp.cn/9.jpg',
-    ],
-    swiperIndex: 0 //这里不写第一次启动展示的时候会有问题
+    swiperIndex: 0, //这里不写第一次启动展示的时候会有问题
+    viewsBaseData: [], // 风景数据
+    landScapeName: '', // 风景名称
   },
-  bindchange(e) {
+
+  async onLoad(options) {
+    // 拿风景
+    let viewsObj = await apiCollection.getViews()
+
+    const viewsBaseData = viewsObj.baseData || []
+
     this.setData({
-      swiperIndex: e.detail.current
+      viewsBaseData,
+      landScapeName: viewsBaseData[0].name || ''
+    })
+
+  },
+
+  bindchange(e) {
+    const { viewsBaseData} = this.data
+    const swiperIndex = e.detail.current
+    this.setData({
+      swiperIndex,
+      landScapeName: viewsBaseData[swiperIndex].name
     })
   },
 

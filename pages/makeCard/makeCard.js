@@ -30,8 +30,8 @@ Page({
     saveImgFlag: false, // 保存图片成功标识
     showBlessFlag: false,
     currentViewIndex: 0,
-    viewsBaseData: {}, // 风景数据
-    wishesBaseData: {}, // 祝福语数据
+    viewsBaseData: [], // 风景数据
+    wishesBaseData: [], // 祝福语数据
     currentBlessIndex: 0,
     newBless: '', // 手动选择的祝福语
   },

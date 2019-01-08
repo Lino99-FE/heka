@@ -19,7 +19,7 @@
 }
 
 .main-bg-bottom {
-  bottom: 0;
+  top: 976rpx;
 }
 
 .main-view {

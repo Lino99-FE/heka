@@ -3,9 +3,9 @@
   <image class='main-bg-item main-bg-bottom' mode='widthFix' src='/images/landscape-bg-bottom.png'></image>
   <view class='main-view'>
     <swiper class="swiperClass" interval="2000" duration="1000" previous-margin="84px" next-margin="74px" circular bindchange="bindchange">
-      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+      <block wx:for="{{viewsBaseData}}" wx:key="{{index}}">
         <swiper-item>
-          <image src="{{item}}" class="slide-image {{swiperIndex < index ? swiperIndex==0&&index==imgUrls.length-1?'leftitem quiet':'rightitem quiet': swiperIndex > index?swiperIndex==imgUrls.length-1&&index==0?'rightitem quiet':'leftitem quiet':'active'}}" mode='aspectFill'>
+          <image src="{{'http://' + item.api_main_img}}" class="slide-image {{swiperIndex < index ? swiperIndex==0&&index==imgUrls.length-1?'leftitem quiet':'rightitem quiet': swiperIndex > index?swiperIndex==imgUrls.length-1&&index==0?'rightitem quiet':'leftitem quiet':'active'}}" mode='aspectFill'>
           </image>
         </swiper-item>
       </block>
@@ -16,7 +16,7 @@
         <view class='border-out-line border-out-top'></view>
         <view class='border-out-line border-out-bottom'></view>
         <view class='art-banner-in'>
-          贺州姑婆山
+          {{landScapeName}}
           <view class='border-in-line border-in-left'></view>
           <view class='border-in-line border-in-right'></view>
         </view>
