@@ -25,6 +25,7 @@
   font-size: 23rpx;
   color: rgba(43, 110, 147, 1);
   line-height: 23rpx;
+  margin-bottom: 10rpx;
 }
 
 .land-img {
@@ -33,14 +34,23 @@
   width: 660rpx;
 }
 
+.land-img-bg {
+  position: absolute;
+  top: 20rpx;
+  left: 42rpx;
+  width: 663rpx;
+  height: 387rpx;
+}
+
 .swiperClass {
-  margin: 0;
-  height: 370rpx;
+  margin-left: 15rpx;
+  width: 628rpx;
+  height: 353rpx;
 }
 
 .slide-image {
-  width: 659rpx;
-  height: 370rpx;
+  width: 628rpx;
+  height: 353rpx;
 }
 
 .img-idx-tip {
@@ -78,14 +88,14 @@
   position: absolute;
   left: 0;
   top: 0;
-  margin: 173rpx 45rpx;
+  margin: 173rpx 58rpx;
 }
 
 .img-right-btn {
   position: absolute;
   right: 0;
   top: 0;
-  margin: 173rpx 45rpx;
+  margin: 173rpx 62rpx;
 }
 
 .img-btn {
@@ -125,12 +135,19 @@
 
 .readmore-view {
   margin-top: 25rpx;
-  line-height: 29rpx;
   height: 29rpx;
-  text-align: center;
   font-size: 29rpx;
   font-weight: 400;
   color: #80B0CA;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.readmore-view-arrow {
+  width: 27rpx;
+  height: 15rpx;
+  margin-left: 10rpx;
 }
 
 .make-btn-view {
@@ -187,7 +204,8 @@
 }
 
 .title-right {
-  font-size: 18rpx;
+  font-size: 23rpx;
+  line-height: 23rpx;
   font-weight: 400;
   color: rgba(84, 142, 174, 1);
 }

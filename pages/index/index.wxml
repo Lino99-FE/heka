@@ -35,19 +35,21 @@
       <view bindtap='goMakeCard' class='make-card-btn'><text class='make-card-btn-text'>制作专属贺卡</text></view>
       <view class='slide'>
         <view class='slide1 slide-item' bindtap='goLandScape'>
-          <image mode='aspectFill' src='/images/slide-bg.png' class='slide-item-bg'></image>
-          <view class='slide-item-content'>
+          <image mode='aspectFill' src='/images/icon-view.png' class='slide-item-bg'></image>
+          <!-- <image mode='aspectFill' src='/images/slide-bg.png' class='slide-item-bg'></image> -->
+          <!-- <view class='slide-item-content'>
             <image mode='widthFix' src='/images/fengjing-2.png'></image>
             <view>风景</view>
-          </view>
+          </view> -->
 
         </view>
         <view class='slide2 slide-item' bindtap='goNews'>
-          <image mode='aspectFill' src='/images/slide-bg.png' class='slide-item-bg'></image>
-          <view class='slide-item-content'>
+          <image mode='aspectFill' src='/images/icon-news.png' class='slide-item-bg'></image>
+          <!-- <image mode='aspectFill' src='/images/slide-bg.png' class='slide-item-bg'></image> -->
+          <!-- <view class='slide-item-content'>
             <image mode='widthFix' src='/images/zixunlanmu.png'></image>
             <view>资讯</view>
-          </view>
+          </view> -->
 
         </view>
       </view>

@@ -84,9 +84,33 @@ const getViewDetail = async (id) => {
   return obj
 }
 
+// 拿分类
+const getCategories = async () => {
+  const time = new Date().getTime()
+  let obj = {}
+  const categoryObj = wx.getStorageSync('categoryObj')
+  if (categoryObj && categoryObj.data && (categoryObj.time + app.globalData.storageTime) >= time) {
+    obj = categoryObj
+  } else {
+    const category = {}
+    const categoryRes = await app.apiRequst('categories')
+    for (const item of categoryRes.data) {
+      category[item.id] = item
+    }
+    obj = {
+      data: category,
+      time,
+      baseData: categoryRes.data
+    }
+    wx.setStorageSync('categoryObj', obj)
+  }
+  return obj
+}
+
 export default {
   getKeyWords,
   getViews,
   getWishes,
-  getViewDetail
+  getViewDetail,
+  getCategories
 }

@@ -1,2 +1,1 @@
-<!--pages/newsDetail/newsDetail.wxml-->
-<text>pages/newsDetail/newsDetail.wxml</text>
+<web-view src="{{link}}"></web-view>

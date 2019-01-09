@@ -1,1 +1,13 @@
-<view>资讯</view>
+<view class='main'>
+  <view class='header'>
+    <view wx:for="{{categoryData}}" wx:for-item="item" wx:key="{{item.id}}" wx:for-index="index" data-index="{{index}}" bindtap="check" class='header-item {{checkIndex == index ? "header-item-active" : ""}}'>{{item.name}}</view>
+  </view>
+  <view class='body'>
+    <view bindtap='goDetail' data-index="{{index}}" wx:for="{{currentData}}" wx:key="{{item.id}}" wx:for-item="item" wx:for-index="index" class='item'>
+      <image class='item-img' mode='aspectFill' src='{{item.api_head_img}}'></image>
+      <view class='item-bottom'>
+      </view>
+      <view class='item-name'>{{item.name}}</view>
+    </view>
+  </view>
+</view>

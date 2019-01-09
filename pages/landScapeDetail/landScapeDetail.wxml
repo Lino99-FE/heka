@@ -14,8 +14,9 @@
   <view class='title-triangle'></view>
   <view class='land-title'>{{viewsData.title}}</view>
   <view class='land-img'>
-    <swiper bindtap='swiperClick' current="{{showSwiperIndex}}" class="swiperClass" duration="2000" autoplay bindchange="bindchange">
-      <block wx:for="{{imgsUrl}}" wx:key="{{index}}">
+    <image class='land-img-bg' src='/images/view-detail-bg.png'></image>
+    <swiper bindtap='swiperClick' current="{{showSwiperIndex}}" duration='500' class="swiperClass" bindchange="bindchange">
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
         <swiper-item>
           <image src="{{item}}" class="slide-image" mode='aspectFill'>
           </image>
@@ -39,6 +40,7 @@
   </view>
   <view wx:if="{{!readMoreFlag}}" class='readmore-view' bindtap='readMoreFn'>
     <text>查看更多</text>
+    <image class='readmore-view-arrow' mode='aspectFill' src='/images/more-arrow.png'></image>
   </view>
   <view class='make-btn-view'>
     <view class='make-btn' bindtap='goMakeCard'>制作{{viewsData.name}}贺卡</view>

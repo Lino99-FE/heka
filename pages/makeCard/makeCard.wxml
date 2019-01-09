@@ -1,11 +1,15 @@
 <view class="view">
   <image class='view-bg1' src='/images/index-bg-bottom.png'></image>
   <image class='view-bg2' mode='widthFix' src='/images/index-bg.png'></image>
-  <view class='container'>
-    <view class='card-view'>
+  <view class='container {{preViewFlag?"preview-main":""}}'>
+    <view class='card-view {{preViewFlag?"preview-view":""}}'>
       <view class='card-header'>
-        <open-data class='card-avatar' type="userAvatarUrl"></open-data>
-        <open-data class='card-nick' type="userNickName"></open-data>
+        <image class='card-avatar' wx:if="{{preViewFlag}}" src='{{avatarUrlBase}}'></image>
+        <open-data wx:else class='card-avatar' type="userAvatarUrl"></open-data>
+        <view class='card-nick'>
+          <text wx:if="{{preViewFlag}}">{{nick}}</text>
+          <open-data wx:else type="userNickName"></open-data>
+        </view>
         <text class='card-ad'>{{cardAd}}</text>
       </view>
       <view class='card-key'>
@@ -31,14 +35,19 @@
       </view>
     </view>
     <view wx:if="{{!makeImgFlag}}" class='make-card-view'>
-      <view class='make-card-item1'>
-        <view class='bottom-btn' bindtap='changeView'>更换景点</view>
-        <view class='bottom-btn' bindtap='changeBless' style='margin-left: 60rpx'>更换祝福语</view>
+      <view wx:if="{{preViewFlag}}" class='make-card-item1 {{preViewFlag?"preview-btn":""}}'>
+        <view class='bottom-btn' bindtap='goIndex' style='width: 273rpx'>我也要制作贺卡</view>
       </view>
-      <view class='make-card-item2'>
-        <view wx:if="{{userInfoAuthFlag}}" bindtap='makePoster' class='bottom-btn make-btn'>完成制作</view>
-        <button wx:else open-type='getUserInfo' bindgetuserinfo="userInfoCallBack" class='bottom-btn make-btn btn-border'>完成制作</button>
-        <!-- <button wx:if="{{!photoAuthFlag}}" open-type='openSetting' class='bottom-btn btn-border make-btn'>授权相册</button> -->
+      <view wx:else>
+        <view class='make-card-item1'>
+          <view class='bottom-btn' bindtap='changeView'>更换景点</view>
+          <view class='bottom-btn' bindtap='changeBless' style='margin-left: 60rpx'>更换祝福语</view>
+        </view>
+        <view class='make-card-item2'>
+          <view wx:if="{{userInfoAuthFlag}}" bindtap='makePoster' class='bottom-btn make-btn'>完成制作</view>
+          <button wx:else open-type='getUserInfo' bindgetuserinfo="userInfoCallBack" class='bottom-btn make-btn btn-border'>完成制作</button>
+          <!-- <button wx:if="{{!photoAuthFlag}}" open-type='openSetting' class='bottom-btn btn-border make-btn'>授权相册</button> -->
+        </view>
       </view>
     </view>
     <view wx:else class='share-view'>
@@ -59,16 +68,16 @@
           <image class='share-view-icon' mode='aspectFill' src='/images/weibo.png'></image>
           <view class='share-view-text'>新浪微博</view>
         </view>
-        
-        
+
+
       </view>
     </view>
   </view>
-  <view wx:if="{{showBlessFlag}}"  class='bless-mark' catchtouchmove></view>
+  <view wx:if="{{showBlessFlag}}" class='bless-mark' catchtouchmove></view>
   <view wx:if="{{showBlessFlag}}" class='bless'>
     <view class='bless-top'>
       <text>请选择祝福语</text>
-      <image bindtap='closeBless' mode='widthFix' src='/images/guanbi.png'></image>
+      <image bindtap='closeBless' src='/images/guanbi.png'></image>
     </view>
     <scroll-view class='bless-content' scroll-y>
       <view wx:for="{{wishesBaseData}}" wx:for-index="index" bindtap='checkBless' data-index="{{index}}" wx:for-item="item" wx:key="{{item.id}}" class='bless-content-item'>

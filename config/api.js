@@ -21,8 +21,8 @@ const api = {
     url: '/api/categories',
     type: 'get'
   },
-  informations: {
-    url: '/api/informations',
+  information: {
+    url: '/api/information?{queryString}',
     type: 'get'
   }
 

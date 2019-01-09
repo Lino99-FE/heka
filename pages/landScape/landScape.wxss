@@ -19,12 +19,12 @@
 }
 
 .main-bg-bottom {
-  top: 1080rpx;
+  top: 1030rpx;
 }
 
 .main-view {
   position: relative;
-  padding-top: 256rpx;
+  padding-top: 200rpx;
   z-index: 3;
 }
 
@@ -33,13 +33,17 @@
   height: 641rpx;
 }
 
+.swiper-item-view {
+  position: relative;
+  z-index: 1;
+}
+
 .slide-image {
   width: 427rpx;
   height: 641rpx;
-  border-radius: 20rpx;
+  border-radius: 40rpx;
   position: relative;
-  background: transparent;
-  box-shadow:0rpx 9rpx 21rpx 6rpx rgba(80,84,88,0.27), 0rpx 0rpx 23rpx 2rpx rgba(219,227,238,0.16);
+  z-index: 4;
 }
 
 image.active {
@@ -49,14 +53,17 @@ image.active {
 
 image.firstitem {
   transform: scale(0.41493) translateX(-80rpx);
+  box-shadow:0rpx 9rpx 30rpx 8rpx rgba(80,84,88,0.34);
 }
 
 image.leftitem {
   transform: scale(0.41493) translateX(80rpx);
+  box-shadow:0rpx 9rpx 30rpx 8rpx rgba(80,84,88,0.34);
 }
 
 image.rightitem {
   transform: scale(0.41493) translateX(-80rpx);
+  box-shadow:0rpx 9rpx 30rpx 8rpx rgba(80,84,88,0.34);
 }
 
 image.quiet {

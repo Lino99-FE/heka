@@ -15,13 +15,14 @@ Page({
    */
   data: {
     avatarUrl: '',
+    avatarUrlBase: '',
     keyBGImgUrl: '/images/card-key-bg.png',
     landScapeUrl: '',
-    codeImgUrl: '/images/gh_62cd02b064eb_258.jpg',
+    codeImgUrl: '/images/qr-code.png',
     nick: '',
-    cardAd: '微信赠与你一张风景新年贺卡',
+    cardAd: '微信赠予你一张风景新年贺卡',
     cardKey: '',
-    cardKeyTip: '',
+    cardKeyTip: '猪年关键字',
     cardBless: '',
     landScapeName: '',
     landScapeDesc: '',
@@ -41,6 +42,10 @@ Page({
     makeImgFlag: false, // 是否生成海报
     pickerZodiac: zodiacData[choiceIndex], // 默认选择的生肖
     pickerConstellation: constellationData[choiceIndex], // 默认选择的星座
+    zodiacname: '',
+    zodiacValue: '',
+    constellationValue: '',
+    preViewFlag: false, // 落地页模式，不可修改
   },
 
   /**
@@ -51,19 +56,11 @@ Page({
       title: '加载中...',
     })
     try {
-
-      let { zodiacname, zodiac, constellation, viewId} = options
-      if (viewId) {
-        const { pickerZodiac, pickerConstellation} = this.data
-        zodiacname = pickerZodiac.name
-        zodiac = pickerZodiac.value
-        constellation = pickerConstellation.value
-      }
-
       // 校验是否有授权
       userInfoAuthFlag = false
       let {
-        userInfoAuthFlag
+        userInfoAuthFlag,
+        preViewFlag
       } = this.data
       try {
         const { authSetting } = await util.getSettingWx()
@@ -74,6 +71,7 @@ Page({
           const imgRes = await util.getImageInfoWx(userInfo.avatarUrl)
           this.setData({
             avatarUrl: imgRes.path,
+            avatarUrlBase: userInfo.avatarUrl,
             nick: userInfo.nickName,
           })
         }
@@ -84,7 +82,9 @@ Page({
           userInfoAuthFlag
         })
       }
-
+      
+      let { zodiacname, zodiac, constellation, viewId, blessId, newCard, shareFlag, avatarUrlBase, nick } = options
+      
       // 拿关键字
       let cardKeys = await apiCollection.getKeyWords()
 
@@ -96,13 +96,36 @@ Page({
 
       const viewsBaseData = viewsObj.baseData || []
       const wishesBaseData = wishesObj.baseData || []
-
-      const landScapeName = viewsBaseData[0].name || ''
-      const landScapeDesc = viewsBaseData[0].card_intro || ''
-      const landScapeUrl = viewsBaseData[0].api_card_img
+      // 给默认新贺卡赋初始值
+      let viewDataId = Object.keys(viewsObj.data)[0]
+      let wisheDataId = Object.keys(wishesObj.data)[0]
+      if (viewId) {
+        viewDataId = viewId
+        if (newCard) {
+          // 代表从风景详情点击进入，需要带入风景数据
+          const { pickerZodiac, pickerConstellation } = this.data
+          zodiacname = pickerZodiac.name
+          zodiac = pickerZodiac.value
+          constellation = pickerConstellation.value
+        }
+        if (shareFlag) {
+          wx.setNavigationBarTitle({
+            title: '查看贺卡'
+          })
+          wisheDataId = blessId
+          preViewFlag = true
+          this.setData({
+            avatarUrlBase,
+            nick
+          })
+        }
+        
+      }
+      const landScapeName = viewsObj.data[viewDataId].name || ''
+      const landScapeDesc = viewsObj.data[viewDataId].card_intro || ''
+      const landScapeUrl = viewsObj.data[viewDataId].api_card_img
       const cardKey = cardKeys[`${zodiac}${constellation}`]
-      const cardKeyTip = zodiacname.substring(1, 2) + '年关键字'
-      const cardBless = wishesBaseData[0].blessing
+      const cardBless = wishesObj.data[wisheDataId].blessing
 
       this.setData({
         cardKey,
@@ -110,9 +133,12 @@ Page({
         landScapeDesc,
         landScapeUrl,
         cardBless,
-        cardKeyTip,
         viewsBaseData,
         wishesBaseData,
+        zodiacname,
+        zodiacValue: zodiac,
+        constellationValue: constellation,
+        preViewFlag
       })
     } finally {
       wx.hideLoading()
@@ -140,25 +166,42 @@ Page({
   onShareAppMessage() {
     const {
       shareImg,
-      nick,
-      landScapeUrl
+      landScapeUrl,
+      currentViewIndex, 
+      viewsBaseData,
+      currentBlessIndex,
+      wishesBaseData,
+      zodiacname,
+      zodiacValue,
+      constellationValue,
+      avatarUrl,
+      avatarUrlBase,
+      nick
     } = this.data
+    const viewId = viewsBaseData[currentViewIndex].id
+    const blessId = wishesBaseData[currentBlessIndex].id
+
     const obj = {
-      title: `${nick}赠与你一张新年贺卡`,
-      path: `/pages/makeCard/makeCard`,
+      title: `送你一张新年风景贺卡，祝您猪年大吉！`,
+      path: `/pages/makeCard/makeCard?shareFlag=true&viewId=${viewId}&blessId=${blessId}&zodiacname=${zodiacname}&zodiac=${zodiacValue}&constellation=${constellationValue}&avatarUrlBase=${avatarUrlBase}&nick=${nick}`,
       imageUrl: landScapeUrl
     }
+    console.log(obj)
     return obj
   },
 
   // 授权回调
-  userInfoCallBack(e) {
+  async userInfoCallBack(e) {
     const {
       userInfo
     } = e.detail
     if (userInfo) {
+      const imgRes = await util.getImageInfoWx(userInfo.avatarUrl)
       this.setData({
-        userInfoAuthFlag: true
+        userInfoAuthFlag: true,
+        avatarUrl: imgRes.path,
+        avatarUrlBase: userInfo.avatarUrl,
+        nick: userInfo.nickName
       })
       app.globalData.userInfo = userInfo
       this.makePoster()
@@ -267,9 +310,8 @@ Page({
         // 用户昵称
         ctx.setFontSize(17)
         ctx.setFillStyle('#ffffff')
-        ctx.fillText(nick, 136, 64)
-        // 昵称旁边说明语
-        ctx.fillText(cardAd, 260, 64)
+        // 昵称+旁边说明语
+        ctx.fillText(nick + cardAd, 136, 64)
         // 关键字底图
         ctx.drawImage(keyBGImgUrl, 176, 99, 156, 143)
         // 关键字
@@ -293,39 +335,42 @@ Page({
         canvasTools.wordsWrap(ctx, landScapeDesc, 328, 11, 680, 24, 14)
         
         //二维码图片
-        ctx.drawImage(codeImgUrl, 414, 634, 71, 71)
+        ctx.drawImage(codeImgUrl, 400, 625, 96, 96)
         // 二维码文字
         ctx.setFontSize(12)
-        ctx.fillText(codeTip, 397, 741)
+        ctx.fillText(codeTip, 395, 741)
         
         // 需要等待canvas生成后,在callback里再执行canvasToTempFilePath导出图片
-        ctx.draw(false, () => {
-          wx.canvasToTempFilePath({
-            x: 0,
-            y: 0,
-            canvasId: ctx.canvasId,
-            success: res => {
-              let shareImg = res.tempFilePath
-              const makeImgFlag = true
-              this.setData({
-                shareImg,
-                makeImgFlag
-              }, () => {
-                wx.setNavigationBarTitle({
-                  title: '分享贺卡'
-                })
-                wx.hideLoading()
+        //多次测试后发现，wx.canvasToTempFilePath()这个方法不只需要在ctx.draw回调中执行，还需要setTimeout一定时间才能保证保存的图片是自己程序预期的样子。因此可使用async、await 写法：
+        await new Promise((resolve, reject) => ctx.draw(false, () => setTimeout(() => resolve(), 100)));
+        wx.canvasToTempFilePath({
+          x: 0,
+          y: 0,
+          canvasId: ctx.canvasId,
+          success: res => {
+            let shareImg = res.tempFilePath
+            const makeImgFlag = true
+            this.setData({
+              shareImg,
+              makeImgFlag
+            }, () => {
+              wx.setNavigationBarTitle({
+                title: '分享贺卡'
               })
-            },
-            fail(err) {
               wx.hideLoading()
               wx.showToast({
-                title: '海报生成失败，请稍后再试',
-                icon: 'none'
+                title: '制作成功',
               })
-            }
-          })
-        });
+            })
+          },
+          fail(err) {
+            wx.hideLoading()
+            wx.showToast({
+              title: '海报生成失败，请稍后再试',
+              icon: 'none'
+            })
+          }
+        })
       } else {
         wx.showToast({
           title: '图片下载失败，请稍后再试',
@@ -338,6 +383,12 @@ Page({
   // 长按保存事件
   async saveImg() {
     await util.saveImage(this.data.shareImg, this)
+  },
+
+  goIndex() {
+    wx.redirectTo({
+      url: '/pages/index/index',
+    })
   }
 
 })

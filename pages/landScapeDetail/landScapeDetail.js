@@ -16,7 +16,7 @@ Page({
     viewsData: {}, // 风景详情数据
     viewsBaseData: [], // 风景全部数据
     randViewData: [],
-    imgsUrl: [],
+    imgUrls: [],
   },
 
   /**
@@ -27,10 +27,10 @@ Page({
     // 拿风景详情
     let viewsDetailObj = await apiCollection.getViewDetail(id)
     const viewsData = viewsDetailObj.data[id] || {}
-    const imgsUrl = []
+    const imgUrls = []
     const { imgs} = viewsData.album
     imgs.forEach(item => {
-      imgsUrl.push(item.api_path)
+      imgUrls.push(item.api_path)
     })
 
     // 拿风景
@@ -67,7 +67,7 @@ Page({
       viewsData,
       viewsBaseData,
       randViewData,
-      imgsUrl
+      imgUrls
     })
   },
 
@@ -117,7 +117,7 @@ Page({
   goMakeCard() {
     const { viewsData } = this.data
     wx.redirectTo({
-      url: `/pages/makeCard/makeCard?viewId=${viewsData.id}`,
+      url: `/pages/makeCard/makeCard?newCard=true&viewId=${viewsData.id}`,
     })
   },
 
