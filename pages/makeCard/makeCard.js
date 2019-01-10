@@ -18,7 +18,7 @@ Page({
     avatarUrlBase: '',
     keyBGImgUrl: '/images/card-key-bg.png',
     landScapeUrl: '',
-    codeImgUrl: '/images/qr-code.png',
+    codeImgUrl: '/images/qr-code.jpg',
     nick: '',
     cardAd: '微信赠予你一张风景新年贺卡',
     cardKey: '',
@@ -52,6 +52,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   async onLoad(options) {
+    // 下载字体
+    app.loadArtFont();
     wx.showLoading({
       title: '加载中...',
     })

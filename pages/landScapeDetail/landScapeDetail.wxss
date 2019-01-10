@@ -37,13 +37,19 @@
 .land-img-bg {
   position: absolute;
   top: 20rpx;
-  left: 42rpx;
+  left: 43rpx;
   width: 663rpx;
   height: 387rpx;
 }
 
+.swiperClass-main {
+  margin-left: 12rpx;
+  width: 628rpx;
+  height: 353rpx;
+  position: relative;
+}
+
 .swiperClass {
-  margin-left: 15rpx;
   width: 628rpx;
   height: 353rpx;
 }
@@ -73,7 +79,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 64rpx;
+  margin-bottom: 45rpx;
   font-weight: 300;
   color: rgba(253, 253, 253, 1);
   opacity: 0.6;
@@ -88,14 +94,14 @@
   position: absolute;
   left: 0;
   top: 0;
-  margin: 173rpx 58rpx;
+  margin-top: 127rpx;
 }
 
 .img-right-btn {
   position: absolute;
   right: 0;
   top: 0;
-  margin: 173rpx 62rpx;
+  margin-top: 127rpx;
 }
 
 .img-btn {

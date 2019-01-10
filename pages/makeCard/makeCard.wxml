@@ -1,6 +1,5 @@
 <view class="view">
-  <image class='view-bg1' src='/images/index-bg-bottom.png'></image>
-  <image class='view-bg2' mode='widthFix' src='/images/index-bg.png'></image>
+  <image class='view-bg' src='/images/main-bg.png'></image>
   <view class='container {{preViewFlag?"preview-main":""}}'>
     <view class='card-view {{preViewFlag?"preview-view":""}}'>
       <view class='card-header'>

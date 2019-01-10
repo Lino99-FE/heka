@@ -23,6 +23,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   async onLoad(options) {
+    // 下载字体
+    app.loadArtFont();
+    
     const {id} = options
     // 拿风景详情
     let viewsDetailObj = await apiCollection.getViewDetail(id)

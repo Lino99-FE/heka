@@ -23,6 +23,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   async onLoad(options) {
+    // 下载字体
+    app.loadArtFont();
     let { checkIndex} = this.data
     const res = await apiCollection.getCategories();
     const {baseData} = res

@@ -13,6 +13,8 @@ Page({
   },
 
   async onLoad(options) {
+    // 下载字体
+    app.loadArtFont();
     // 拿风景
     let viewsObj = await apiCollection.getViews()
 

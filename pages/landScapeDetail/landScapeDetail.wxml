@@ -15,23 +15,26 @@
   <view class='land-title'>{{viewsData.title}}</view>
   <view class='land-img'>
     <image class='land-img-bg' src='/images/view-detail-bg.png'></image>
-    <swiper bindtap='swiperClick' current="{{showSwiperIndex}}" duration='500' class="swiperClass" bindchange="bindchange">
-      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
-        <swiper-item>
-          <image src="{{item}}" class="slide-image" mode='aspectFill'>
-          </image>
-        </swiper-item>
-      </block>
-    </swiper>
-    <!-- <view class='img-idx-tip'>{{swiperIndex + 1}}/{{imgUrls.length}}</view> -->
-    <view bindtap='swiperLeft' class='img-left-btn img-btn'>
-      <image class='img-btn-left-img' mode='widthFix' src='/images/white-arrow.png'></image>
+    <view class='swiperClass-main'>
+      <swiper bindtap='swiperClick' current="{{showSwiperIndex}}" duration='500' class="swiperClass" bindchange="bindchange">
+        <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+          <swiper-item>
+            <image src="{{item}}" class="slide-image" mode='aspectFill'>
+            </image>
+          </swiper-item>
+        </block>
+      </swiper>
+      <!-- <view class='img-idx-tip'>{{swiperIndex + 1}}/{{imgUrls.length}}</view> -->
+      <view bindtap='swiperLeft' class='img-left-btn img-btn'>
+        <image class='img-btn-left-img' mode='widthFix' src='/images/white-arrow.png'></image>
+      </view>
+      <view bindtap='swiperRight' class='img-right-btn img-btn'>
+        <image mode='widthFix' src='/images/white-arrow.png'></image>
+      </view>
+      <view class='img-tip' bindtap='swiperClick'>
+        <image mode='aspectFill' src='/images/chakandatu.png'></image>点击查看大图
+      </view>
     </view>
-    <view bindtap='swiperRight' class='img-right-btn img-btn'>
-      <image mode='widthFix' src='/images/white-arrow.png'></image>
-    </view>
-    <view class='img-tip' bindtap='swiperClick'>
-      <image mode='aspectFill' src='/images/chakandatu.png'></image>点击查看大图</view>
   </view>
   <view class='land-desc'>
     <view class='land-desc-content {{readMoreFlag?"":"text-hidden"}}'>

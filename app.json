@@ -2,7 +2,6 @@
   "pages":[
     "pages/index/index",
     "pages/makeCard/makeCard",
-    "pages/saveCard/saveCard",
     "pages/news/news",
     "pages/newsDetail/newsDetail",
     "pages/landScape/landScape",

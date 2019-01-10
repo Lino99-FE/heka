@@ -17,6 +17,8 @@ Page({
   },
 
   async onLoad() {
+    // 下载字体
+    app.loadArtFont();
   },  
 
   zodiacBindChange(e) {
