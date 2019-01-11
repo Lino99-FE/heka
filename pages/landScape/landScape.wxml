@@ -6,7 +6,7 @@
       <block wx:for="{{viewsBaseData}}" wx:for-index="index" wx:key="{{index}}">
         <swiper-item>
           <view class='swiper-item-view'>
-            <image src="{{item.api_main_img}}" class="slide-image {{swiperIndex < index ? swiperIndex==0&&index==viewsBaseData.length-1?'leftitem quiet':'rightitem quiet': swiperIndex > index?swiperIndex==viewsBaseData.length-1&&index==0?'rightitem quiet':'leftitem quiet':'active'}}" mode='aspectFill'>
+            <image src="{{item.api_main_img+'?imageMogr2/thumbnail/427x641'}}" class="slide-image {{swiperIndex < index ? swiperIndex==0&&index==viewsBaseData.length-1?'leftitem quiet':'rightitem quiet': swiperIndex > index?swiperIndex==viewsBaseData.length-1&&index==0?'rightitem quiet':'leftitem quiet':'active'}}" mode='aspectFill'>
           </image>
           </view>
         </swiper-item>
