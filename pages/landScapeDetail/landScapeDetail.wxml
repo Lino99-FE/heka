@@ -16,7 +16,7 @@
   <view class='land-img'>
     <image class='land-img-bg' src='/images/view-detail-bg.png'></image>
     <view class='swiperClass-main'>
-      <swiper bindtap='swiperClick' current="{{showSwiperIndex}}" duration='500' class="swiperClass" bindchange="bindchange">
+      <swiper bindtap='swiperClick' current="{{showSwiperIndex}}" duration='500' class="swiperClass" bindchange="bindchange"  bindanimationfinish="changeSwip" >
         <block wx:for="{{imgUrls}}" wx:key="{{index}}">
           <swiper-item>
             <image src="{{item+'?imageMogr2/thumbnail/628x353'}}" class="slide-image" mode='aspectFill'>
@@ -58,15 +58,15 @@
     </view>
     <view class='other-land'>
       <view class='other-land-item' data-id="{{randViewData[0].id}}" bindtap='goNewDetail'>
-        <image src="{{randViewData[0].api_main_img}}" mode='aspectFill' class='other-land-item-img'></image>
+        <image src="{{randViewData[0].api_main_img+'?imageMogr2/thumbnail/414x386'}}" mode='aspectFill' class='other-land-item-img'></image>
         <view class='other-land-item-name'>{{randViewData[0].name}}</view>
       </view>
       <view class='other-land-item' data-id="{{randViewData[1].id}}" bindtap='goNewDetail'>
-        <image src="{{randViewData[1].api_main_img}}" mode='aspectFill' class='other-land-item-img'></image>
+        <image src="{{randViewData[1].api_main_img+'?imageMogr2/thumbnail/414x386'}}" mode='aspectFill' class='other-land-item-img'></image>
         <view class='other-land-item-name'>{{randViewData[1].name}}</view>
       </view>
       <view class='other-land-item' data-id="{{randViewData[2].id}}" bindtap='goNewDetail'>
-        <image src="{{randViewData[2].api_main_img}}" mode='aspectFill' class='other-land-item-img'></image>
+        <image src="{{randViewData[2].api_main_img+'?imageMogr2/thumbnail/414x386'}}" mode='aspectFill' class='other-land-item-img'></image>
         <view class='other-land-item-name'>{{randViewData[2].name}}</view>
       </view>
     </view>

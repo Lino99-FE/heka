@@ -20,7 +20,7 @@
       </view>
       <view class='card-blessing'>{{cardBless}}</view>
       <view class='card-landscape'>
-        <image class='card-landscape-img' mode='aspectFill' src='{{landScapeUrl}}'></image>
+        <image class='card-landscape-img' mode='aspectFill' src='{{landScapeUrl+"?imageMogr2/thumbnail/491x276"}}'></image>
       </view>
       <view class='card-introduction'>
         <view class='card-introduction-desc'>

@@ -2,7 +2,7 @@
   <image class='main-bg-item main-bg-top' mode='widthFix' src='/images/landscape-bg-top.png'></image>
   <image class='main-bg-item main-bg-bottom' mode='widthFix' src='/images/landscape-bg-bottom.png'></image>
   <view class='main-view'>
-    <swiper bindtap='goDetail' class="swiperClass" interval="2000" duration="1000" previous-margin="84px" next-margin="74px" circular bindchange="bindchange">
+    <swiper bindtap='goDetail' class="swiperClass" interval="2000" duration="1000" previous-margin="84px" next-margin="74px" circular bindchange="bindchange" bindanimationfinish="changeSwip" current="{{currentIndex}}">
       <block wx:for="{{viewsBaseData}}" wx:for-index="index" wx:key="{{index}}">
         <swiper-item>
           <view class='swiper-item-view'>
