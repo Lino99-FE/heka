@@ -125,11 +125,13 @@
 
 .picker-class {
   height: 50rpx;
+  border: none !important;
 }
 
 .picker-view-column {
   line-height: 50rpx !important;
   height: 50rpx !important;
+  border: none !important;
 }
 
 .make-card-btn {

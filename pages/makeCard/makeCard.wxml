@@ -45,7 +45,6 @@
         <view class='make-card-item2'>
           <view wx:if="{{userInfoAuthFlag}}" bindtap='makePoster' class='bottom-btn make-btn'>完成制作</view>
           <button wx:else open-type='getUserInfo' bindgetuserinfo="userInfoCallBack" class='bottom-btn make-btn btn-border'>完成制作</button>
-          <!-- <button wx:if="{{!photoAuthFlag}}" open-type='openSetting' class='bottom-btn btn-border make-btn'>授权相册</button> -->
         </view>
       </view>
     </view>
@@ -57,13 +56,13 @@
           <image class='share-view-icon' mode='aspectFill' src='/images/wechat.png'></image>
           <view class='share-view-text'>微信好友</view>
         </view>
-        <view class='share-view-item' bindtap='saveImg'>
-          <!-- <button class='share-btn'></button> -->
+        <view class='share-view-item' data-type='moments' bindtap='saveImg'>
+          <button wx:if="{{!photoAuthFlag}}" open-type='openSetting' class='auth-btn'></button>
           <image class='share-view-icon' mode='aspectFill' src='/images/moments.png'></image>
           <view class='share-view-text'>朋友圈</view>
         </view>
-        <view class='share-view-item' bindtap='saveImg'>
-          <!-- <button class='share-btn'></button> -->
+        <view class='share-view-item' data-type='weibo' bindtap='saveImg'>
+          <button wx:if="{{!photoAuthFlag}}" open-type='openSetting' class='auth-btn'></button>
           <image class='share-view-icon' mode='aspectFill' src='/images/weibo.png'></image>
           <view class='share-view-text'>新浪微博</view>
         </view>
@@ -89,6 +88,18 @@
     </view>
   </view>
 </view>
+<view wx:if="{{toastShowFlag}}" class='toast-view' catchtouchmove>
+  <view class='cu-toast'>
+    <view class='cu-toast-bg'></view>
+    <view class='cu-toast-content'>
+      <image class='cu-toast-icon' mode='widthFix' src='/images/icon-success.png'></image>
+      <view class='cu-toast-desc'>贺卡已保存到手机相册</view>
+      <view class='cu-toast-desc'>请使用{{toastType=='moments'?'朋友圈':'新浪微博' }}进行分享</view>
+    </view>
+
+  </view>
+</view>
+
 <!-- <scroll-view scroll-x style="width: 670rpx;height: 800px;padding: 40rpx;background: rgba(250, 217, 136, 1)">
   <canvas style="width: 520px;height: 786px;background:transparent;" canvas-id="myCanvas"></canvas>
 </scroll-view> -->

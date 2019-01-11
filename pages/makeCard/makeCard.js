@@ -46,6 +46,8 @@ Page({
     zodiacValue: '',
     constellationValue: '',
     preViewFlag: false, // 落地页模式，不可修改
+    toastType: 'moments', // 保存图片成功提示，moments:朋友圈; weibo：微博;
+    toastShowFlag: false, // 是否显示
   },
 
   /**
@@ -348,6 +350,8 @@ Page({
         wx.canvasToTempFilePath({
           x: 0,
           y: 0,
+          fileType: 'jpg',
+          quality: 1,
           canvasId: ctx.canvasId,
           success: res => {
             let shareImg = res.tempFilePath
@@ -383,8 +387,13 @@ Page({
   },
 
   // 长按保存事件
-  async saveImg() {
-    await util.saveImage(this.data.shareImg, this)
+  async saveImg(e) {
+    const { type } = e.currentTarget.dataset
+    this.setData({
+      toastType: type
+    }, async () => {
+      await util.saveImage(this.data.shareImg, this)
+    })
   },
 
   goIndex() {

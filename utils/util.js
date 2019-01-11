@@ -35,10 +35,14 @@ const saveImageWx = (imgTmpPath, that) => {
         filePath: imgTmpPath,
         success: res => {
           that.setData({
-            saveImgFlag: true
-          })
-          wx.showToast({
-            title: '保存成功'
+            saveImgFlag: true,
+            toastShowFlag: true
+          }, () => {
+            setTimeout(() => {
+              that.setData({
+                toastShowFlag: false
+              })
+            }, 3500)
           })
           resolve(res)
         },
