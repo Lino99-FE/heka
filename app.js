@@ -7,19 +7,19 @@ App({
   async onLaunch () {
   },
   loadArtFont() {
-    wx.loadFontFace({
-      family: 'artfont',
-      source: 'url("https://fuwu.saasphp.cn/FZYanSJW.TTF")',
-      success(res) {
-        // console.log(res.status)
-      },
-      fail: function (res) {
-        // console.log(res.status)
-      },
-      complete: function (res) {
-        // console.log(res.status)
-      }
-    })
+    // wx.loadFontFace({
+    //   family: 'artfont',
+    //   source: 'url("https://fuwu.saasphp.cn/FZYanSJW.TTF")',
+    //   success(res) {
+    //     // console.log(res.status)
+    //   },
+    //   fail: function (res) {
+    //     // console.log(res.status)
+    //   },
+    //   complete: function (res) {
+    //     // console.log(res.status)
+    //   }
+    // })
   },
   globalData: {
     userInfo: null,
