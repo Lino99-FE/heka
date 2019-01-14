@@ -36,7 +36,7 @@ const constellationData = [
     "value": "i"
   },
   {
-    "name": "魔羯座",
+    "name": "摩羯座",
     "value": "j"
   },
   {

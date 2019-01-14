@@ -3,7 +3,7 @@
   <view class='container {{preViewFlag?"preview-main":""}}'>
     <view class='card-view {{preViewFlag?"preview-view":""}}'>
       <view class='card-header'>
-        <image class='card-avatar' wx:if="{{preViewFlag}}" src='{{avatarUrlBase}}'></image>
+        <image class='card-avatar' wx:if="{{preViewFlag&&avatarUrlBase}}" src='{{avatarUrlBase}}'></image>
         <open-data wx:else class='card-avatar' type="userAvatarUrl"></open-data>
         <view class='card-nick'>
           <text wx:if="{{preViewFlag}}">{{nick}}</text>
@@ -19,7 +19,7 @@
         </view>
       </view>
       <view class='card-blessing'>{{cardBless}}</view>
-      <view class='card-landscape'>
+      <view class='card-landscape' wx:if="{{landScapeUrl}}">
         <image class='card-landscape-img' mode='aspectFill' src='{{landScapeUrl+"?imageMogr2/thumbnail/491x276"}}'></image>
       </view>
       <view class='card-introduction'>

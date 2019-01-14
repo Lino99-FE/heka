@@ -20,7 +20,7 @@ Page({
     landScapeUrl: '',
     codeImgUrl: '/images/qr-code.png',
     nick: '',
-    cardAd: '微信赠予你一张风景新年贺卡',
+    cardAd: '赠予你一张风景新年贺卡',
     cardKey: '',
     cardKeyTip: '猪年关键字',
     cardBless: '',

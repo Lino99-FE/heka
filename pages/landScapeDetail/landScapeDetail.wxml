@@ -56,7 +56,7 @@
         <text>查看更多>></text>
       </view>
     </view>
-    <view class='other-land'>
+    <view class='other-land' wx:if="{{randViewData.length > 0}}">
       <view class='other-land-item' data-id="{{randViewData[0].id}}" bindtap='goNewDetail'>
         <image src="{{randViewData[0].api_main_img+'?imageMogr2/thumbnail/414x386'}}" mode='aspectFill' class='other-land-item-img'></image>
         <view class='other-land-item-name'>{{randViewData[0].name}}</view>
