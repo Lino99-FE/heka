@@ -56,5 +56,17 @@
       </view>
     </view>
   </view>
-
+<view wx:if="{{makeFlag}}" class='key-view'>
+  <view class='key-bg'></view>
+  <view class='key-main'>
+    <view class='key-animation'>
+      <view class='key-content' style='left: {{marqueeDistance}}rpx;font-size: {{size}}rpx;'>
+        {{cardKeyStr}}
+      </view>
+    </view>
+    <view>
+      正在生成猪年关键字...
+    </view>
+  </view>
+</view>
 </view>
