@@ -48,12 +48,18 @@ Page({
     preViewFlag: false, // 落地页模式，不可修改
     toastType: 'moments', // 保存图片成功提示，moments:朋友圈; weibo：微博;
     toastShowFlag: false, // 是否显示
+    gifFlag: true, //动图显示
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   async onLoad(options) {
+    setTimeout(() => {
+      this.setData({
+        gifFlag: false
+      })
+    }, 2300)
     // 下载字体
     app.loadArtFont();
     wx.showLoading({

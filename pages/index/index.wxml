@@ -32,7 +32,7 @@
       </view>
       <image class='main-left-img' mode='widthFix' src='/images/ace866f2c3cd20b0bb89d91c16459bcc.png'></image>
       <view bindtap='goMakeCard' class='make-card-btn'>
-        <text class='make-card-btn-text'>制作专属贺卡</text>
+        <text class='make-card-btn-text'>开始制作</text>
       </view>
       <view class='slide'>
         <view class='slide1 slide-item' bindtap='goLandScape'>
@@ -56,17 +56,16 @@
       </view>
     </view>
   </view>
-<view wx:if="{{makeFlag}}" class='key-view'>
-  <view class='key-bg'></view>
-  <view class='key-main'>
-    <view class='key-animation'>
-      <view class='key-content' style='left: {{marqueeDistance}}rpx;font-size: {{size}}rpx;'>
-        {{cardKeyStr}}
+  <view wx:if="{{makeFlag}}" class='key-view'>
+    <view class='key-bg'></view>
+    <view class='key-main'>
+      <view class='key-animation'>
+        <image class='key-animation-bg {{makeFinishFlag?"":"ani-rotateZ"}}' mode='widthFix' src='/images/cardkey-bg.png'></image>
+        <text class='key-content {{makeFinishFlag?"key-content-big":"key-content-small"}}'>{{cardKeyStr}}</text>
+      </view>
+      <view class='key-tip'>
+        正在生成猪年关键字...
       </view>
     </view>
-    <view>
-      正在生成猪年关键字...
-    </view>
   </view>
-</view>
 </view>

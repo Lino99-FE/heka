@@ -6,6 +6,8 @@ import apiCollection from '../../utils/apiCollection.js'
 
 const app = getApp()
 const choiceIndex = 2
+let cardKeyArr = []
+let cardKeyIndex = 0
 
 Page({
   data: {
@@ -16,13 +18,10 @@ Page({
     pickerZodiac: zodiacData[choiceIndex],
     pickerConstellation: constellationData[choiceIndex],
     makeFlag: false,
+    stopCardKeyFlag: false,
+    makeFinishFlag: false,
     cardKeyStr: '',
-    marqueePace: 1,//滚动速度
-    marqueeDistance: 490,//初始滚动距离
-    interval: 20, // 时间间隔
-    windowWidth: 500, // 滚动宽度
-    size: 26, // 文字字号
-    strLength: 0, // 文字长度
+    interval: 100, // 时间间隔
   },
 
   async onLoad() {
@@ -31,7 +30,14 @@ Page({
   },
 
   onShow() {
-    
+    cardKeyArr = []
+    cardKeyIndex = 0
+    this.setData({
+      makeFlag: false,
+      stopCardKeyFlag: false,
+      makeFinishFlag: false,
+      cardKeyStr: '',
+    })
   },
 
   zodiacBindChange(e) {
@@ -59,50 +65,82 @@ Page({
   },
 
   async goMakeCard() {
-    const { pickerZodiac, pickerConstellation, size} = this.data
+    const {
+      pickerZodiac,
+      pickerConstellation,
+      size
+    } = this.data
     wx.showLoading({
       title: '加载中...',
     })
     let cardKeys = await apiCollection.getKeyWords()
-    let cardKeyStr = ''
-    for (let item in cardKeys) {
-      cardKeyStr += cardKeys[item]
-    }
+
     wx.hideLoading()
+    for (let item in cardKeys) {
+      cardKeyArr.push(cardKeys[item])
+    }
+    // 开启关键字背景
     this.setData({
-      makeFlag: true,
-      cardKeyStr
+      makeFlag: true
     })
-    const strLength = cardKeyStr.length * size;//文字长度
-    this.setData({
-      strLength
-    })
-    this.run1()
-    // setTimeout(() => {
-    //   this.setData({
-    //     makeFlag: false
-    //   })
-    //   wx.navigateTo({
-    //     url: `/pages/makeCard/makeCard?zodiacname=${pickerZodiac.name}&zodiac=${pickerZodiac.value}&constellation=${pickerConstellation.value}`,
-    //   })
-    // }, 3000)
-    
+    setTimeout(() => {
+      // 半秒后开始滚动关键字
+      this.changeCardKey()
+      setTimeout(() => {
+        // 3秒之后停止关键字滚动
+        this.setData({
+          stopCardKeyFlag: true,
+          cardKeyStr: ''
+        })
+        setTimeout(() => {
+          // 0.7秒之后停止背景转动，显示真正关键字
+          this.setData({
+            makeFinishFlag: true,
+            cardKeyStr: cardKeys[`${pickerZodiac.value}${pickerConstellation.value}`]
+          })
+          // 1.5秒后跳转至贺卡制作页面，清空标记Flag
+          setTimeout(() => {
+            wx.navigateTo({
+              url: `/pages/makeCard/makeCard?zodiacname=${pickerZodiac.name}&zodiac=${pickerZodiac.value}&constellation=${pickerConstellation.value}`,
+            })
+            cardKeyArr = []
+            cardKeyIndex = 0
+            this.setData({
+              makeFlag: false,
+              stopCardKeyFlag: false,
+              makeFinishFlag: false,
+              cardKeyStr: '',
+            })
+          }, 1500)
+        }, 700)
+      }, 3000)
+    }, 500)
+
+
+
   },
 
-  run1() {
-    let { marqueeDistance, marqueePace, interval, strLength, windowWidth} = this.data
+  changeCardKey() {
+    const {
+      interval
+    } = this.data
+    const len = cardKeyArr.length || 0
+    let cardKeyStr = ''
     const inter = setInterval(() => {
-      if (-marqueeDistance < strLength) {
-        marqueeDistance = marqueeDistance - marqueePace
-        this.setData({
-          marqueeDistance,
-        });
-      } else {
+      if (this.data.stopCardKeyFlag) {
         clearInterval(inter)
-        this.setData({
-          marqueeDistance: windowWidth
-        });
-        this.run1()
+      } else {
+        if (cardKeyIndex < len) {
+          cardKeyStr = cardKeyArr[cardKeyIndex]
+          this.setData({
+            cardKeyStr,
+          });
+          cardKeyIndex++
+        } else {
+          clearInterval(inter)
+          cardKeyIndex = 0
+          this.changeCardKey()
+        }
       }
     }, interval)
   },

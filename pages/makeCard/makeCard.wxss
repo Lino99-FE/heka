@@ -385,3 +385,18 @@
   margin-bottom: 15rpx;
 }
 
+.gif-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+.gif-view image {
+  width: 520rpx;
+  height: 750rpx;
+  position: relative;
+  z-index: 99999;
+}

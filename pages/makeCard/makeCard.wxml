@@ -2,6 +2,9 @@
   <image class='view-bg' src='/images/main-bg.png'></image>
   <view class='container {{preViewFlag?"preview-main":""}}'>
     <view class='card-view {{preViewFlag?"preview-view":""}}'>
+      <view class='gif-view' wx:if="{{gifFlag}}">
+        <image src='/images/2.gif'></image>
+      </view>
       <view class='card-header'>
         <image class='card-avatar' wx:if="{{preViewFlag&&avatarUrlBase}}" src='{{avatarUrlBase}}'></image>
         <open-data wx:else class='card-avatar' type="userAvatarUrl"></open-data>

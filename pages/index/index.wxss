@@ -204,7 +204,6 @@
   margin-top: 20rpx;
 }
 
-
 .key-view {
   position: fixed;
   top: 0;
@@ -224,13 +223,13 @@
   right: 0;
   bottom: 0;
   background: #000;
-  opacity: 0.4;
+  opacity: 0.8;
   z-index: 100;
 }
 
 .key-main {
-  width: 500rpx;
-  height: 500rpx;
+  width: 600rpx;
+  height: 800rpx;
   color: #fff;
   z-index: 101;
   display: flex;
@@ -241,17 +240,54 @@
 }
 
 .key-animation {
-  width: 500rpx;
-  height: 400rpx;
-  background: #fff;
+  width: 600rpx;
+  height: 600rpx;
   color: #000;
-  font-size: 30rpx;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.key-animation-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 600rpx;
+  height: 600rpx;
+  z-index: 101;
+}
+
+.key-content-big {
+  font-size: 260rpx;
+  line-height: 260rpx;
+}
+
+.key-content-small {
+  font-size: 180rpx;
+  line-height: 180rpx;
 }
 
 .key-content {
-  position: absolute;
-  top: 50rpx;
-  white-space: nowrap;
+  color: #face66;
+  z-index: 102;
+}
+
+.key-tip {
+  font-size: 36rpx;
+  margin-top: 30rpx;
+}
+
+.ani-rotateZ {
+  animation: rotateZ 18s linear infinite;
+}
+
+@keyframes rotateZ {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
