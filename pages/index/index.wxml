@@ -60,11 +60,11 @@
     <view class='key-bg'></view>
     <view class='key-main'>
       <view class='key-animation'>
-        <image class='key-animation-bg {{makeFinishFlag?"":"ani-rotateZ"}}' mode='widthFix' src='/images/cardkey-bg.png'></image>
+        <image class='key-animation-bg ani-rotateZ {{makeFinishFlag?"ani-rotateZ-pause":""}}' mode='widthFix' src='/images/cardkey-bg.png'></image>
         <text class='key-content {{makeFinishFlag?"key-content-big":"key-content-small"}}'>{{cardKeyStr}}</text>
       </view>
       <view class='key-tip'>
-        正在生成猪年关键字...
+        {{makeFinishFlag?'猪年关键字':'正在生成猪年关键字...'}}
       </view>
     </view>
   </view>

@@ -98,7 +98,7 @@ Page({
             makeFinishFlag: true,
             cardKeyStr: cardKeys[`${pickerZodiac.value}${pickerConstellation.value}`]
           })
-          // 1.5秒后跳转至贺卡制作页面，清空标记Flag
+          // 1.8秒后跳转至贺卡制作页面，清空标记Flag
           setTimeout(() => {
             wx.navigateTo({
               url: `/pages/makeCard/makeCard?zodiacname=${pickerZodiac.name}&zodiac=${pickerZodiac.value}&constellation=${pickerConstellation.value}`,
@@ -111,7 +111,7 @@ Page({
               makeFinishFlag: false,
               cardKeyStr: '',
             })
-          }, 1500)
+          }, 1800)
         }, 700)
       }, 3000)
     }, 500)

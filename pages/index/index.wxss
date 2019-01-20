@@ -291,3 +291,7 @@
     transform: rotate(360deg);
   }
 }
+
+.ani-rotateZ-pause {
+    animation-play-state: paused;
+}
