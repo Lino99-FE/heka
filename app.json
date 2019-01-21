@@ -12,5 +12,8 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "贺卡小程序",
     "navigationBarTextStyle":"black"
-  }
+  },
+  "requiredBackgroundModes": [
+    "audio"
+  ]
 }

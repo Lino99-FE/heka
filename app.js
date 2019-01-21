@@ -5,6 +5,9 @@ const http = new Http();
 
 App({
   async onLaunch () {
+    this.globalData.bgam = wx.getBackgroundAudioManager()
+    this.globalData.bgam.src = 'https://fuwu.saasphp.cn/music.mp3'
+    this.globalData.bgam.title = '贺州风采'
   },
   loadArtFont() {
     // wx.loadFontFace({
@@ -21,6 +24,7 @@ App({
     //   }
     // })
   },
+
   globalData: {
     userInfo: null,
     storageTime: 86400000, // 数据本地缓存时间
